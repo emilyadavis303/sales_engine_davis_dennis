@@ -1,16 +1,33 @@
 require 'csv'
 require_relative '../lib/transaction'
+require 'pry'
 
 class TransactionRepository
-  attr_reader :transaction
+  attr_reader   :transaction_data,
+                :transactions
 
-  def initialize(filename='./data/transactions.csv')
-    transaction_data = CSV.open(filename, headers: true, header_converters: :symbol)
+  def initialize
+    @transaction_repository = CSV.open('./test/fixtures/transactions_sample.csv', headers: true, header_converters: :symbol)
 
-    @transactions = transaction_data.collect do |transaction|
-      transaction
+    @transactions = []
+
+    build_records(@transaction_repository)
+  end
+
+  def build_records(repository)
+    @transactions = repository.map {|row| Transaction.new(row)}
+  end
+
+  def find_by_credit_card_number(number)
+    @transactions.find do |transaction|
+      transaction.credit_card_number == number
     end
+  end
 
+  def find_all_by_result(result)
+    @transactions.find do |transaction|
+      transaction.status.downcase == result.downcase
+    end
   end
 
   def count
