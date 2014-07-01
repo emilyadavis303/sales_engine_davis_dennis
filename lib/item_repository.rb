@@ -1,3 +1,4 @@
+require 'csv'
 require_relative '../lib/item'
 
 class ItemRepository
