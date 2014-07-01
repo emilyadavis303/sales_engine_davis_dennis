@@ -20,8 +20,8 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal '9', result.id
   end
 
-  # def test_it_can_find_all_by_result
-  #   result = @repo.find_by_status('success')
-  # end
-
+  def test_it_can_find_all_by_result
+    result = @repo.find_all_by_result('success')
+    assert_equal 10, result.count
+  end
 end
