@@ -30,6 +30,12 @@ class TransactionRepository
     end
   end
 
+  def find_by_id(id)
+    @transactions.find do |transaction|
+      transaction.id.to_s == id.to_s
+    end
+  end
+
   def count
     @transactions.count
   end

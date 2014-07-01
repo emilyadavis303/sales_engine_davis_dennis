@@ -22,6 +22,12 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_it_can_find_all_by_result
     result = @repo.find_all_by_result('success')
-    assert_equal 10, result.count
+    assert_equal 9, result.count
+  end
+
+  def test_it_can_find_a_transaction_by_id
+    result = @repo.find_by_id(5)
+    assert_equal '4844518708741275', result.credit_card_number
+    assert_equal '6', result.invoice_id
   end
 end
