@@ -15,4 +15,16 @@ class CustomerRepositoryTest < Minitest::Test
   def test_a_repository_loads_customers
     assert @repo.count >= 10
   end
+
+  def test_can_find_a_customer_by_last_name
+    assert_equal @repo.customers[4], @repo.find_by_last_name('Nader')
+  end
+
+  def test_can_find_a_customer_by_first_name
+    assert_equal @repo.customers[7], @repo.find_all_by_first_name('Loyal').first
+  end
+
+  def test_can_find_a_customer_by_id
+    assert_equal @repo.customers[2], @repo.find_by_id('3')
+  end
 end
