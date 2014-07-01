@@ -6,7 +6,7 @@ class MerchantsRepositoryTest < Minitest::Test
   attr_reader :merchant_repository
 
   def setup
-    @repo = MerchantRepository.new("./test/fixtures/merchants_sample_data.csv")
+    @repo = MerchantRepository.new("./test/fixtures/merchants_sample.csv")
   end
 
   def test_it_exists

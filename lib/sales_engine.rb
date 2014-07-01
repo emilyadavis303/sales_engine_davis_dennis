@@ -8,6 +8,7 @@ class SalesEngine
   def startup
     @merchant_repository = MerchantRepository.new
     @item_repository     = ItemRepository.new
+    @invoice_repository  = InvoiceRepository.new
   end
 
 end
