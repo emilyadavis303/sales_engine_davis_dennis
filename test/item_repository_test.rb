@@ -1,10 +1,7 @@
 require './test/test_helper'
-require 'csv'
 require_relative '../lib/item_repository'
 
 class ItemRepositoryTest < Minitest::Test
-  attr_reader :item_repository
-
   def setup
     @repo = ItemRepository.new("./test/fixtures/items_sample.csv")
   end

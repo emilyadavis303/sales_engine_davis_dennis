@@ -1,8 +1,7 @@
 require_relative '../lib/merchant'
 
 class MerchantRepository
-  attr_accessor :merchant_repository,
-                :merchants
+  attr_reader   :merchants
 
   def initialize(filename='./data/merchants.csv')
     merchant_data = CSV.open(filename, headers: true, header_converters: :symbol)

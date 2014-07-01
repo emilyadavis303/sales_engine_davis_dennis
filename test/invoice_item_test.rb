@@ -1,10 +1,7 @@
 require './test/test_helper'
-require './test/test_helper'
-require 'csv'
 require_relative '../lib/invoice_item'
 
-
-class InvoiceTest < Minitest::Test
+class InvoiceItemTest < Minitest::Test
   def setup
     @invoice_item = InvoiceItem.new(id: '4', item_id: '535', quantity: '3')
   end

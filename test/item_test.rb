@@ -1,9 +1,5 @@
 require './test/test_helper'
-require './test/test_helper'
-require 'csv'
 require_relative '../lib/item'
-require_relative '../lib/item_repository'
-
 
 class ItemTest < Minitest::Test
   def setup

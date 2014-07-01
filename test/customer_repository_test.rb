@@ -1,7 +1,5 @@
 require './test/test_helper'
-require 'csv'
 require_relative '../lib/customer_repository'
-require_relative '../lib/customer'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository

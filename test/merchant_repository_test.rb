@@ -1,16 +1,12 @@
 require './test/test_helper'
-require 'csv'
 require_relative '../lib/merchant_repository'
 
-class MerchantsRepositoryTest < Minitest::Test
-  attr_reader :merchant_repository
-
+class MerchantRepositoryTest < Minitest::Test
   def setup
     @repo = MerchantRepository.new("./test/fixtures/merchants_sample.csv")
   end
 
   def test_it_exists
-    # binding.pry
     assert @repo
   end
 

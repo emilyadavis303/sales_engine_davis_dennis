@@ -1,8 +1,5 @@
 require './test/test_helper'
-require './test/test_helper'
-require 'csv'
 require_relative '../lib/customer'
-
 
 class CustomerTest < Minitest::Test
   def setup

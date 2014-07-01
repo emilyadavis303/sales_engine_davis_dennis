@@ -1,7 +1,7 @@
 require_relative '../lib/customer'
 
 class CustomerRepository
-  attr_accessor :customers
+  attr_reader :customers
 
   def initialize(filename='./data/customers.csv')
     customer_data = CSV.open(filename, headers: true, header_converters: :symbol)
