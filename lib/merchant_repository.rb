@@ -5,16 +5,12 @@ class MerchantRepository
                 :merchants
 
   def initialize(filename='./data/merchants.csv')
-    @merchant_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-    @merchants           = []
-    
-    build_merchant_repository(merchants)
-  end
+    merchant_data = CSV.open(filename, headers: true, header_converters: :symbol)
 
-  def build_merchant_repository(merchants)
-    @merchant_repository.each do |row|
-      @merchants << Merchant.new(row)
+    @merchants = merchant_data.collect do |merchant|
+      merchant
     end
+
   end
 
   def count

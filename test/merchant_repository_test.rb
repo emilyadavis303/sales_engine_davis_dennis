@@ -3,20 +3,26 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'csv'
 require_relative '../lib/merchant_repository'
+require 'pry'
 
 class MerchantsRepositoryTest < Minitest::Test
   attr_reader :merchant_repository
 
   def setup
-    @merchants = MerchantRepository.new("./test/fixtures/merchants_sample_data.csv")
+    @repo = MerchantRepository.new("./test/fixtures/merchants_sample_data.csv")
   end
 
   def test_it_exists
-    assert @merchants
+    # binding.pry
+    assert @repo
   end
 
   def test_a_repository_loads_merchants
-    assert @merchants.count >= 10
+    assert @repo.count >= 10
   end
+
+  # def test_if_merchants_were_really_created
+  #   assert_equal 'Willms and Sons', @repo.name.include?
+  # end
 
 end
