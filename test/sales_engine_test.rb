@@ -1,8 +1,6 @@
 require './test/test_helper'
 require 'csv'
 require_relative '../lib/sales_engine'
-require_relative '../lib/merchant_repository'
-require_relative '../lib/item_repository'
 
 class SalesEngineTest < Minitest::Test
   def test_it_exists
@@ -22,5 +20,6 @@ class SalesEngineTest < Minitest::Test
     assert engine.merchant_repository
     assert engine.item_repository
     assert engine.invoice_repository
+    assert engine.invoice_item_repository
   end
 end
