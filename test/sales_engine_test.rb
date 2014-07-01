@@ -21,5 +21,6 @@ class SalesEngineTest < Minitest::Test
     assert engine.item_repository
     assert engine.invoice_repository
     assert engine.invoice_item_repository
+    assert engine.customer_repository
   end
 end
