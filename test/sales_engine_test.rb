@@ -1,6 +1,4 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require 'csv'
 require_relative '../lib/sales_engine'
 require_relative '../lib/merchant_repository'
@@ -17,10 +15,10 @@ class SalesEngineTest < Minitest::Test
     assert engine.startup
   end
 
-  def test_it_loads_merchant_repository
+  def test_it_loads_repositories
     engine = SalesEngine.new
     engine.startup
     assert engine.merchant_repository
-    assert engine
+    assert engine.item_repository
   end
 end

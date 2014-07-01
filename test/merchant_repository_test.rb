@@ -1,9 +1,6 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require 'csv'
 require_relative '../lib/merchant_repository'
-require 'pry'
 
 class MerchantsRepositoryTest < Minitest::Test
   attr_reader :merchant_repository
