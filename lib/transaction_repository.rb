@@ -1,18 +1,12 @@
 require 'csv'
 require_relative '../lib/transaction'
+require_relative '../lib/parser'
 
 class TransactionRepository
   attr_reader :transactions
 
   def initialize(filename='./data/transactions.csv')
-    @transactions = []
-    @transaction_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-
-    build_records(@transaction_repository)
-  end
-
-  def build_records(repository)
-    @transactions = repository.map {|row| Transaction.new(row)}
+    @transactions = Parser.new.parse(filename, Transaction)
   end
 
   def find_by_credit_card_number(number)
