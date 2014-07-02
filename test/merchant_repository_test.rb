@@ -21,7 +21,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_merchants_by_name
-    result = @repo.find_all_by_name('Williamson Group')
-    assert_equal 2, result.count
+    results = @repo.find_all_by_name('Williamson Group')
+    assert_equal 2, results.count
   end
 end
