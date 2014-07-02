@@ -9,6 +9,14 @@ class TransactionRepository
     @transactions = Parser.new.parse(filename, Transaction)
   end
 
+  def random
+    @transactions.shuffle.first
+  end
+
+  def all
+    @transactions
+  end
+
   def find_by_credit_card_number(number)
     @transactions.find {
       |transaction| transaction.credit_card_number == number

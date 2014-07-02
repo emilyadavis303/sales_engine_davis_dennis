@@ -9,6 +9,14 @@ class InvoiceRepository
     @invoices = Parser.new.parse(filename, Invoice)
   end
 
+  def random
+    @invoices.shuffle.first
+  end
+
+  def all
+    @invoices
+  end
+
   def find_by_status(status)
     @invoices.find {
       |invoice| invoice.status == status

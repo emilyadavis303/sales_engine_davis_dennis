@@ -1,12 +1,21 @@
 require 'csv'
 require_relative '../lib/customer'
 require_relative '../lib/parser'
+require 'pry'
 
 class CustomerRepository
   attr_reader   :customers
 
   def initialize(filename='./data/customers.csv')
     @customers = Parser.new.parse(filename, Customer)
+  end
+
+  def random
+    @customers.shuffle.first
+  end
+
+  def all
+    @customers
   end
 
   def find_by_last_name(last_name)

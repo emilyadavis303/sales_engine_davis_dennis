@@ -9,6 +9,14 @@ class InvoiceItemRepository
     @invoice_items = Parser.new.parse(filename, InvoiceItem)
   end
 
+  def random
+    @invoice_items.shuffle.first
+  end
+
+  def all
+    @invoice_items
+  end
+
   def find_by_item_id(item_id)
     @invoice_items.find {
       |item| item.item_id.to_s == item_id.to_s
