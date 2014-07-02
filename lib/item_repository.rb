@@ -6,8 +6,8 @@ require_relative '../lib/parser'
 class ItemRepository
   attr_reader   :items
 
-  def initialize(filename='./data/items.csv')
-    @items = Parser.new.parse(filename, Item)
+  def initialize(engine_ref, filename='./data/items.csv')
+    @items = Parser.new.parse(filename, Item, self)
   end
 
   def random
@@ -29,11 +29,6 @@ class ItemRepository
       |item| item.name == name
     }
   end
-
-  def find_by_unit_price(BigDecimal.new("935.19"))
-
-  end
-
 
   def count
     @items.count
