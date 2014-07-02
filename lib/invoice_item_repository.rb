@@ -11,19 +11,19 @@ class InvoiceItemRepository
 
   def find_by_item_id(item_id)
     @invoice_items.find {
-      |invoice_item| invoice_item.item_id.to_s == item_id.to_s
+      |item| item.item_id.to_s == item_id.to_s
     }
   end
 
   def find_all_by_quanity(quantity)
     @invoice_items.find_all {
-      |invoice_item| invoice_item.quantity.to_s == quantity
+      |item| item.quantity == quantity.to_s
     }
   end
 
   def find_by_id(id)
     @invoice_items.find {
-      |invoice_item| invoice_item.id.to_s == id.to_s
+      |item| item.id.to_s == id.to_s
     }
   end
 

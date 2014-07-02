@@ -21,12 +21,12 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_can_lookup_item_by_quanity
-    skip
-    assert_equal 2, @repo.find_all_by_quanity(6).count
+    result = @repo.find_all_by_quanity(6)
+    assert_equal 2, result.count
   end
 
   def test_can_lookup_item_by_invoice_id
-    skip
-    assert @repo.invoice_items[3], @repo.find_by_id(3)
+    result = @repo.find_by_id(9)
+    assert_equal '1832', result.item_id
   end
 end
