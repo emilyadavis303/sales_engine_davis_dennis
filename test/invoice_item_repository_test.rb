@@ -3,7 +3,7 @@ require_relative '../lib/invoice_item_repository'
 
 class InvoiceItemRepositoryTest < Minitest::Test
   def setup
-    @repo = InvoiceItemRepository.new("./test/fixtures/invoice_items_sample.csv")
+    @repo = InvoiceItemRepository.new(self, 'test/fixtures/invoice_items_sample.csv')
   end
 
   def test_it_exists
