@@ -5,8 +5,8 @@ require_relative '../lib/parser'
 class CustomerRepository
   attr_reader   :customers
 
-  def initialize(filename='./data/customers.csv')
-    @customers = Parser.new.parse(filename, Customer)
+  def initialize(engine_ref, filename='./data/customers.csv')
+    @customers = Parser.new.parse(filename, Customer, self)
   end
 
   def find_by_last_name(last_name)

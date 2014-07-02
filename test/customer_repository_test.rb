@@ -5,7 +5,7 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository
 
   def setup
-    @repo = CustomerRepository.new('test/fixtures/customers_sample.csv')
+    @repo = CustomerRepository.new(self, 'test/fixtures/customers_sample.csv')
   end
 
   def test_it_exists
