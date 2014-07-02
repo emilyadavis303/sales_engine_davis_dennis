@@ -1,18 +1,12 @@
 require 'csv'
 require_relative '../lib/invoice_item'
+require_relative '../lib/parser'
 
 class InvoiceItemRepository
   attr_reader   :invoice_items
 
   def initialize(filename='./data/invoice_items.csv')
-    @invoice_items           = []
-    @invoice_item_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-
-    build_records(@invoice_item_repository)
-  end
-
-  def build_records(repository)
-    @invoice_items = repository.map {|row| InvoiceItem.new(row)}
+    @invoice_items = Parser.new.parse(filename, InvoiceItem)
   end
 
   def find_by_item_id(item_id)
