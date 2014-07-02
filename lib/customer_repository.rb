@@ -13,25 +13,25 @@ class CustomerRepository
   end
 
   def build_records(repository)
-    @customers = repository.map {|row| Customer.new(row)}
+    @customers = repository.map { |row| Customer.new(row) }
   end
 
   def find_by_last_name(last_name)
-    @customers.find do |customer|
-      customer.last_name.downcase == last_name.downcase
-    end
+    @customers.find {
+      |customer| customer.last_name.downcase == last_name.downcase
+    }
   end
 
   def find_all_by_first_name(first_name)
-    @customers.find_all do |customer|
-      customer.first_name.downcase == first_name.downcase
-    end
+    @customers.find_all {
+      |customer| customer.first_name.downcase == first_name.downcase
+    }
   end
 
   def find_by_id(id)
-    @customers.find do |customer|
-      customer.id.to_s == id.to_s
-    end
+    @customers.find {
+      |customer| customer.id.to_s == id.to_s
+    }
   end
 
   def count

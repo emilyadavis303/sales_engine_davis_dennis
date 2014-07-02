@@ -17,21 +17,21 @@ class TransactionRepository
   end
 
   def find_by_credit_card_number(number)
-    @transactions.find do |transaction|
-      transaction.credit_card_number == number
-    end
+    @transactions.find {
+      |transaction| transaction.credit_card_number == number
+    }
   end
 
   def find_all_by_result(result)
-    @transactions.find_all do |transaction|
+    @transactions.find_all { |transaction|
       transaction.result.downcase == result.downcase
-    end
+    }
   end
 
   def find_by_id(id)
-    @transactions.find do |transaction|
-      transaction.id.to_s == id.to_s
-    end
+    @transactions.find {
+      |transaction| transaction.id.to_s == id.to_s
+    }
   end
 
   def count
