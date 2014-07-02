@@ -1,18 +1,12 @@
 require 'csv'
 require_relative '../lib/merchant'
+require_relative '../lib/parser'
 
 class MerchantRepository
   attr_reader   :merchants
 
   def initialize(filename='./data/merchants.csv')
-    @merchants           = []
-    @merchant_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-
-    build_records(@merchant_repository)
-  end
-
-  def build_records(repository)
-    @merchants = repository.map {|row| Merchant.new(row)}
+    @merchants = Parser.new.parse(filename, Merchant)
   end
 
   def find_by_name(name)
@@ -26,7 +20,7 @@ class MerchantRepository
       |merchant| merchant.name == name
     }
   end
-  
+
   def count
     @merchants.count
   end
