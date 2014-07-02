@@ -15,6 +15,18 @@ class ItemRepository
     @items = repository.map {|row| Item.new(row)}
   end
 
+  def find_by_name(name)
+    @items.find {
+      |item| item.name == name
+    }
+  end
+
+  def find_all_by_name(name)
+    @items.find_all {
+      |item| item.name == name
+    }
+  end
+
   def count
     @items.count
   end
