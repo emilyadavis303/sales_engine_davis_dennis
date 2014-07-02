@@ -7,7 +7,7 @@ class Transaction
               :created_at,
               :updated_at
 
-  def initialize(row)
+  def initialize(row, repo_ref)
     @id                          = row[:id]
     @invoice_id                  = row[:invoice_id]
     @credit_card_number          = row[:credit_card_number]
@@ -15,6 +15,7 @@ class Transaction
     @result                      = row[:result]
     @created_at                  = row[:created_at]
     @updated_at                  = row[:updated_at]
+    @repo_ref                    = repo_ref
   end
 
 end
