@@ -1,4 +1,5 @@
 require 'csv'
+require 'bigdecimal'
 require_relative '../lib/item'
 require_relative '../lib/parser'
 
@@ -20,6 +21,11 @@ class ItemRepository
       |item| item.name == name
     }
   end
+
+  def find_by_unit_price(BigDecimal.new("935.19"))
+
+  end
+
 
   def count
     @items.count
