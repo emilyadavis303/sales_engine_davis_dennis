@@ -3,7 +3,7 @@ require_relative '../lib/item_repository'
 
 class ItemRepositoryTest < Minitest::Test
   def setup
-    @repo = ItemRepository.new("./test/fixtures/items_sample.csv")
+    @repo = ItemRepository.new(self, "./test/fixtures/items_sample.csv")
   end
 
   def test_it_exists
