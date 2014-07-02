@@ -5,7 +5,7 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository
 
   def setup
-    @repo = CustomerRepository.new("./test/fixtures/customers_sample.csv")
+    @repo = CustomerRepository.new('test/fixtures/customers_sample.csv')
   end
 
   def test_it_exists
@@ -17,14 +17,18 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_can_find_a_customer_by_last_name
-    assert_equal @repo.customers[4], @repo.find_by_last_name('Nader')
+    result = @repo.find_by_last_name('Considine')
+    assert_equal 'Considine', result.last_name
+    assert_equal 'Loyal', result.first_name
   end
 
-  def test_can_find_a_customer_by_first_name
-    assert_equal @repo.customers[7], @repo.find_all_by_first_name('Loyal').first
+  def test_can_find_multiple_customers_by_first_name
+    result = @repo.find_all_by_first_name('Joey')
+    assert_equal 2, result.count
   end
 
   def test_can_find_a_customer_by_id
-    assert_equal @repo.customers[2], @repo.find_by_id('3')
+    result = @repo.find_by_id(9)
+    assert_equal 'Fadel', result.last_name
   end
 end

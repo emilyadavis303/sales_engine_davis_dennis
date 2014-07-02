@@ -1,13 +1,11 @@
 require 'csv'
 require_relative '../lib/transaction'
-require 'pry'
 
 class TransactionRepository
-  attr_reader   :transaction_data,
-                :transactions
+  attr_reader :transactions
 
-  def initialize
-    @transaction_repository = CSV.open('./test/fixtures/transactions_sample.csv', headers: true, header_converters: :symbol)
+  def initialize(filename='./data/transactions.csv')
+    @transaction_repository = CSV.open(filename, headers: true, header_converters: :symbol)
 
     @transactions = []
 

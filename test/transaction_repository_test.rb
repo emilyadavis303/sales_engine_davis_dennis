@@ -3,7 +3,7 @@ require_relative '../lib/transaction_repository'
 
 class TransactionRepositoryTest < Minitest::Test
   def setup
-    @repo = TransactionRepository.new
+    @repo = TransactionRepository.new('test/fixtures/transactions_sample.csv')
   end
 
   def test_it_exists
