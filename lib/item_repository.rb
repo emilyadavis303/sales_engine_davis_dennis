@@ -10,6 +10,14 @@ class ItemRepository
     @items = Parser.new.parse(filename, Item)
   end
 
+  def random
+    @items.shuffle.first
+  end
+
+  def all
+    @items
+  end
+
   def find_by_name(name)
     @items.find {
       |item| item.name == name
