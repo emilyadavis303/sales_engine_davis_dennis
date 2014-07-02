@@ -1,18 +1,12 @@
 require 'csv'
 require_relative '../lib/customer'
+require_relative '../lib/parser'
 
 class CustomerRepository
   attr_reader   :customers
 
-  def initialize(filename='./data/transactions.csv')
-    @customers           = []
-    @customer_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-
-    build_records(@customer_repository)
-  end
-
-  def build_records(repository)
-    @customers = repository.map {|row| Customer.new(row)}
+  def initialize(filename='./data/customers.csv')
+    @customers = Parser.new.parse(filename, Customer)
   end
 
   def find_by_last_name(last_name)
