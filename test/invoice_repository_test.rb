@@ -1,10 +1,9 @@
 require './test/test_helper'
 require_relative '../lib/invoice_repository'
-require 'pry'
 
 class InvoiceRepositoryTest < Minitest::Test
   def setup
-    @repo = InvoiceRepository.new("./test/fixtures/invoices_sample.csv")
+    @repo = InvoiceRepository.new(self, "./test/fixtures/invoices_sample.csv")
   end
 
   def test_it_exists
