@@ -5,17 +5,17 @@ class MerchantRepository
   attr_reader   :merchants
 
   def initialize(filename='./data/merchants.csv')
-    merchant_data = CSV.open(filename, headers: true, header_converters: :symbol)
+    @merchants           = []
+    @merchant_repository = CSV.open(filename, headers: true, header_converters: :symbol)
 
-    @merchants = merchant_data.collect do |merchant|
-      merchant
-    end
+    build_records(@merchant_repository)
+  end
 
+  def build_records(repository)
+    @merchants = repository.map {|row| Merchant.new(row)}
   end
 
   def count
     @merchants.count
   end
-
-  
 end

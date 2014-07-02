@@ -2,12 +2,11 @@ require 'csv'
 require_relative '../lib/invoice_item'
 
 class InvoiceItemRepository
-  attr_reader :invoice_items
+  attr_reader   :invoice_items
 
   def initialize(filename='./data/invoice_items.csv')
+    @invoice_items           = []
     @invoice_item_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-
-    @invoice_items = []
 
     build_records(@invoice_item_repository)
   end

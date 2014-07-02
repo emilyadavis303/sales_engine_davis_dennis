@@ -5,9 +5,8 @@ class TransactionRepository
   attr_reader :transactions
 
   def initialize(filename='./data/transactions.csv')
-    @transaction_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-
     @transactions = []
+    @transaction_repository = CSV.open(filename, headers: true, header_converters: :symbol)
 
     build_records(@transaction_repository)
   end

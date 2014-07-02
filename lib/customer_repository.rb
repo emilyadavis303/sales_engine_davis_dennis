@@ -5,15 +5,14 @@ class CustomerRepository
   attr_reader   :customers
 
   def initialize(filename='./data/transactions.csv')
+    @customers           = []
     @customer_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-
-    @customers = []
 
     build_records(@customer_repository)
   end
 
   def build_records(repository)
-    @customers = repository.map { |row| Customer.new(row) }
+    @customers = repository.map {|row| Customer.new(row)}
   end
 
   def find_by_last_name(last_name)

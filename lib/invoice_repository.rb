@@ -2,15 +2,17 @@ require 'csv'
 require_relative '../lib/invoice'
 
 class InvoiceRepository
-  attr_accessor :invoices
+  attr_reader   :invoices
 
   def initialize(filename='./data/invoices.csv')
-    invoice_data = CSV.open(filename, headers: true, header_converters: :symbol)
+    @invoices           = []
+    @invoice_repository = CSV.open(filename, headers: true, header_converters: :symbol)
 
-    @invoices = invoice_data.collect do |invoice|
-      invoice
-    end
+    build_records(@invoice_repository)
+  end
 
+  def build_records(repository)
+    @invoices = repository.map {|row| Invoice.new(row)}
   end
 
   def count
