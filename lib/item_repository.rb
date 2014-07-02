@@ -1,18 +1,12 @@
 require 'csv'
 require_relative '../lib/item'
+require_relative '../lib/parser'
 
 class ItemRepository
   attr_reader   :items
 
   def initialize(filename='./data/items.csv')
-    @items           = []
-    @item_repository = CSV.open(filename, headers: true, header_converters: :symbol)
-
-    build_records(@item_repository)
-  end
-
-  def build_records(repository)
-    @items = repository.map {|row| Item.new(row)}
+    @items = Parser.new.parse(filename, Item)
   end
 
   def find_by_name(name)
