@@ -13,17 +13,13 @@ class SalesEngine
               :customer_repository,
               :transaction_repository
 
-
-  def startup
+  def startup(data_path)
     @merchant_repository     = MerchantRepository.new(self)
-    @item_repository         = ItemRepository.new(self)
+    @item_repository         = ItemRepository.new(self, data_path + 'items.csv')
     @invoice_repository      = InvoiceRepository.new(self)
     @invoice_item_repository = InvoiceItemRepository.new(self)
     @customer_repository     = CustomerRepository.new(self)
     @transaction_repository  = TransactionRepository.new(self)
   end
 
-  def pass_off
-    merchant
-  end
 end

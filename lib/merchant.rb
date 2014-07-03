@@ -12,7 +12,4 @@ class Merchant
     @repo_ref     = repo_ref
   end
 
-  def items
-    #reference to merchant repo
-  end
 end
