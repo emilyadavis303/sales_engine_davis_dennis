@@ -23,4 +23,7 @@ class SalesEngine
     @transaction_repository  = TransactionRepository.new(self)
   end
 
+  def pass_off
+    merchant
+  end
 end

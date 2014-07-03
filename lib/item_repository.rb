@@ -1,4 +1,4 @@
-require 'csv'
+ require 'csv'
 require 'bigdecimal'
 require_relative '../lib/item'
 require_relative '../lib/parser'
@@ -27,6 +27,12 @@ class ItemRepository
   def find_all_by_name(name)
     @items.find_all {
       |item| item.name == name
+    }
+  end
+
+  def find_all_by_merchant_id(merchant_id)
+    @items.find_all {
+      |item| item.merchant_id == merchant_id
     }
   end
 

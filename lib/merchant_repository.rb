@@ -7,6 +7,7 @@ class MerchantRepository
 
   def initialize(engine_ref, filename='./data/merchants.csv')
     @merchants = Parser.new.parse(filename, Merchant, self)
+    @engine_ref = engine_ref
   end
 
   def random
@@ -17,6 +18,11 @@ class MerchantRepository
     @merchants
   end
 
+  def find_by_id(id)
+    @merchants.find {
+      |merchant| merchant.id.to_s == id.to_s
+    }
+  end
   def find_by_name(name)
     @merchants.find {
       |merchant| merchant.name == name
@@ -31,5 +37,14 @@ class MerchantRepository
 
   def count
     @merchants.count
+  end
+
+  def items(merchant_obj)
+    id  = merchant_obj.id
+    repo = merchant_obj.repo_ref
+    #call to @engine_ref
+    #pass instance of repo to ingine
+    #find all items by merch_id
+    #return collection
   end
 end
