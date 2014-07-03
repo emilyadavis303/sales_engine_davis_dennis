@@ -4,10 +4,11 @@ require_relative '../lib/parser'
 require 'pry'
 
 class CustomerRepository
-  attr_reader   :customers
+  attr_reader   :customers, :engine
 
-  def initialize(engine_ref, filename='./data/customers.csv')
-    @customers = Parser.new.parse(filename, Customer, self)
+  def initialize(engine, data_path='./data/')
+    @customers = Parser.new.parse(data_path + 'customers.csv', Customer, self)
+    @engine = engine
   end
 
   def random

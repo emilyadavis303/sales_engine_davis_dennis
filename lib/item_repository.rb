@@ -1,13 +1,14 @@
- require 'csv'
+require 'csv'
 require 'bigdecimal'
 require_relative '../lib/item'
 require_relative '../lib/parser'
 
 class ItemRepository
-  attr_reader   :items
+  attr_reader   :items, :engine
 
-  def initialize(engine_ref, filename='./data/items.csv')
-    @items = Parser.new.parse(filename, Item, self)
+  def initialize(engine, data_path='./data/')
+    @items = Parser.new.parse(data_path + 'items.csv', Item, self)
+    @engine = engine
   end
 
   def random

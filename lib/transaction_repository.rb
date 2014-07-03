@@ -3,10 +3,11 @@ require_relative '../lib/transaction'
 require_relative '../lib/parser'
 
 class TransactionRepository
-  attr_reader :transactions
+  attr_reader :transactions, :engine
 
-  def initialize(engine_ref, filename='./data/transactions.csv')
-    @transactions = Parser.new.parse(filename, Transaction, self)
+  def initialize(engine, data_path='./data/')
+    @transactions = Parser.new.parse(data_path + 'transactions.csv', Transaction, self)
+    @engine = engine
   end
 
   def random

@@ -1,9 +1,13 @@
 require './test/test_helper'
 require_relative '../lib/merchant_repository'
+require_relative '../lib/sales_engine'
+require 'pry'
 
 class MerchantRepositoryTest < Minitest::Test
   def setup
-    @repo = MerchantRepository.new(self, "test/fixtures/merchants_sample.csv")
+    engine = SalesEngine.new
+    engine.startup('test/fixtures/')
+    @repo ||= MerchantRepository.new(engine, "test/fixtures/")
   end
 
   def test_it_exists
@@ -24,4 +28,12 @@ class MerchantRepositoryTest < Minitest::Test
     results = @repo.find_all_by_name('Williamson Group')
     assert_equal 2, results.count
   end
+
+  def test_items_has_the_correct_number_of_items
+    results = @repo.items_for_merchant_id('3')
+    assert_equal 4, results.count
+  end
+
+
+
 end

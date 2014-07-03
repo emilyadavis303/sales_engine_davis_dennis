@@ -3,10 +3,11 @@ require_relative '../lib/invoice_item'
 require_relative '../lib/parser'
 
 class InvoiceItemRepository
-  attr_reader   :invoice_items
+  attr_reader   :invoice_items, :engine
 
-  def initialize(engine_ref, filename='./data/invoice_items.csv')
-    @invoice_items = Parser.new.parse(filename, InvoiceItem, self)
+  def initialize(engine, data_path='./data/')
+    @invoice_items = Parser.new.parse(data_path + 'invoice_items.csv', InvoiceItem, self)
+    @engine = engine
   end
 
   def random
