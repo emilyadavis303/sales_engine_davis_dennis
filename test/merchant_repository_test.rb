@@ -29,11 +29,14 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal 2, results.count
   end
 
-  def test_items_has_the_correct_number_of_items
-    results = @repo.items_for_merchant_id('3')
+  def test_merchant_has_the_correct_number_of_items
+    results = @repo.items_for_merchant('3')
     assert_equal 4, results.count
+    # assert 'Item Autem Minima', results.find('Item Autem Minima')
   end
 
-
-
+  def test_returns_correct_invoice_number_for_merchant
+    results = @repo.invoices_for_merchant('3')
+    assert_equal 2, results.count
+  end
 end

@@ -41,16 +41,11 @@ class MerchantRepository
     merchants.count
   end
 
-  def items_for_merchant_id(id)
+  def items_for_merchant(id)
     engine.item_repository.find_all_by_merchant_id(id)
   end
 
-  # def items(name)
-  #   id  = merchant_obj.id
-  #   repo = merchant_obj.repo_ref
-  #   #call to @engine_ref
-  #   #pass instance of repo to ingine
-  #   #find all items by merch_id
-  #   #return collection
-  # end
+  def invoices_for_merchant(id)
+    engine.invoice_repository.find_all_by_merchant_id(id)
+  end
 end
