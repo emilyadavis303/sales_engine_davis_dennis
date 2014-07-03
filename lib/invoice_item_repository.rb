@@ -36,6 +36,12 @@ class InvoiceItemRepository
     }
   end
 
+  def find_all_by_invoice_id(invoice_id)
+    @invoice_items.find_all {
+      |item| item.invoice_id.to_s == invoice_id.to_s
+    }
+  end
+
   def count
     @invoice_items.count
   end

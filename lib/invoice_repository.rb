@@ -27,7 +27,7 @@ class InvoiceRepository
   def find_all_by_status(status)
     @invoices.find_all {
       |invoice| invoice.status == status
-      
+
     }
   end
 
@@ -41,6 +41,10 @@ class InvoiceRepository
     @invoices.find_all {
       |invoice| invoice.merchant_id == merchant_id
     }
+  end
+
+  def invoice_items_for_invoice(id)
+    engine.invoice_item_repository.find_all_by_invoice_id(id)
   end
 
   def count
