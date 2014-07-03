@@ -1,5 +1,6 @@
 require './test/test_helper'
 require_relative '../lib/invoice_item_repository'
+require_relative '../lib/sales_engine'
 
 class InvoiceItemRepositoryTest < Minitest::Test
   def setup
@@ -22,13 +23,18 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal '76941', result.unit_price
   end
 
-  def test_can_lookup_item_by_quanity
-    result = @repo.find_all_by_quanity(6)
+  def test_can_lookup_item_by_quantity
+    result = @repo.find_all_by_quantity(6)
     assert_equal 2, result.count
   end
 
   def test_can_lookup_item_by_invoice_id
     result = @repo.find_by_id(9)
     assert_equal '1832', result.item_id
+  end
+
+  def test_returns_correct_item_for_invoice_items
+    result = @repo.item_for_invoice_items('9')
+    assert_equal 'Item Autem Minima', result.name
   end
 end
