@@ -41,11 +41,11 @@ class MerchantRepository
     merchants.count
   end
 
-  def items_for_merchant(id)
+  def items(id)
     engine.item_repository.find_all_by_merchant_id(id)
   end
 
-  def invoices_for_merchant(id)
+  def invoices(id)
     engine.invoice_repository.find_all_by_merchant_id(id)
   end
 end

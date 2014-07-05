@@ -36,4 +36,10 @@ class InvoiceRepositoryTest < Minitest::Test
     results = @repo.invoice_items_for_invoice('1')
     assert_equal 8, results.count
   end
+
+  def test_returns_collection_of_items_for_invoice
+    results = @repo.items_for_invoice('1')
+    assert_equal 8, results.count
+    assert results.include?('Item Autem Minima')
+  end
 end

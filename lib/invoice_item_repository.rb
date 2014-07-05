@@ -24,6 +24,12 @@ class InvoiceItemRepository
     }
   end
 
+  def find_all_by_item_id(item_id)
+    @invoice_items.find_all {
+      |item| item.item_id.to_s == item_id.to_s
+    }
+  end
+
   def find_all_by_quantity(quantity)
     @invoice_items.find_all {
       |item| item.quantity == quantity.to_s
@@ -42,8 +48,12 @@ class InvoiceItemRepository
     }
   end
 
-  def item_for_invoice_items(item_id)
+  def item(item_id)
     engine.item_repository.find_by_id(item_id)
+  end
+
+  def invoice(invoice_id)
+    engine.invoice_repository.find_by_id(invoice_id)
   end
 
   def count

@@ -34,7 +34,12 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_correct_item_for_invoice_items
-    result = @repo.item_for_invoice_items('9')
+    result = @repo.item('9')
     assert_equal 'Item Autem Minima', result.name
+  end
+
+  def test_returns_correct_invoice_for_invoice_items
+    result = @repo.invoice('9')
+    assert_equal '3', result.merchant_id
   end
 end

@@ -47,6 +47,12 @@ class InvoiceRepository
     engine.invoice_item_repository.find_all_by_invoice_id(id)
   end
 
+  def items_for_invoice(id)
+    engine.invoice_item_repository.item_for_invoice_items(id).collect do |ii|
+      ii.item
+    end
+  end
+
   def count
     @invoices.count
   end
