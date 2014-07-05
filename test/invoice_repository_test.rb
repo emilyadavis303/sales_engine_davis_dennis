@@ -37,9 +37,15 @@ class InvoiceRepositoryTest < Minitest::Test
     assert 3, results.count
 
   end
+
   def test_returns_correct_number_of_invoice_items_for_invoice
     results = @repo.invoice_items('1')
     assert_equal 9, results.count
+  end
+
+  def test_it_can_find_customer_by_id
+    result = @repo.customer('10')
+    assert_equal 'Ramona', result.first_name
   end
 
   # def test_returns_collection_of_items_for_invoice
