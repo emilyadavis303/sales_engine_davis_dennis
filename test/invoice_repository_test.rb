@@ -33,13 +33,20 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_returns_correct_number_of_invoice_items_for_invoice
-    results = @repo.invoice_items_for_invoice('1')
+    skip
+    results = @repo.invoice('1')
     assert_equal 8, results.count
   end
 
   def test_returns_collection_of_items_for_invoice
+    skip
     results = @repo.items_for_invoice('1')
     assert_equal 8, results.count
     assert results.include?('Item Autem Minima')
+  end
+
+  def test_can_find_customers_by_customer_id
+    results = @repo.find_all_by_customer_id('5')
+    assert_equal 2, results.count
   end
 end

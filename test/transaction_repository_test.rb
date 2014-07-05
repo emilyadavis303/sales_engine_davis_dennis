@@ -1,9 +1,12 @@
 require './test/test_helper'
 require_relative '../lib/transaction_repository'
+require_relative '../lib/sales_engine'
 
 class TransactionRepositoryTest < Minitest::Test
   def setup
-    @repo = TransactionRepository.new(self, 'test/fixtures/transactions_sample.csv')
+    engine = SalesEngine.new
+    engine.startup('test/fixtures/')
+    @repo ||= TransactionRepository.new(engine, 'test/fixtures/')
   end
 
   def test_it_exists
@@ -29,5 +32,10 @@ class TransactionRepositoryTest < Minitest::Test
     result = @repo.find_by_id(5)
     assert_equal '4844518708741275', result.credit_card_number
     assert_equal '6', result.invoice_id
+  end
+
+  def test_it_can_find_invoice_for_transaction
+    result = @repo.invoice(4)
+    assert_equal '33', result.merchant_id
   end
 end

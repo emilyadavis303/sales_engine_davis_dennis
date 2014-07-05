@@ -8,7 +8,7 @@ class Invoice
 
   def initialize(row, repo_ref)
     @id            = row[:id]
-    @customer_id   = row[:cusomter_id]
+    @customer_id   = row[:customer_id]
     @merchant_id   = row[:merchant_id]
     @status        = row[:status]
     @created_at    = row[:created_at]

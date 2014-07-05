@@ -1,11 +1,14 @@
 require './test/test_helper'
 require_relative '../lib/customer_repository'
+require_relative '../lib/sales_engine'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository
 
   def setup
-    @repo = CustomerRepository.new(self, 'test/fixtures/customers_sample.csv')
+    engine = SalesEngine.new
+    engine.startup('test/fixtures/')
+    @repo ||= CustomerRepository.new(engine, 'test/fixtures/')
   end
 
   def test_it_exists
@@ -30,5 +33,10 @@ class CustomerRepositoryTest < Minitest::Test
   def test_can_find_a_customer_by_id
     result = @repo.find_by_id(9)
     assert_equal 'Fadel', result.last_name
+  end
+
+  def test_it_can_return_correct_number_of_invoices_for_customer
+    results = @repo.invoices('5')
+    assert_equal 2, results.count
   end
 end

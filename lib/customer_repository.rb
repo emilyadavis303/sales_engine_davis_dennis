@@ -37,8 +37,11 @@ class CustomerRepository
     }
   end
 
+  def invoices(id)
+    engine.invoice_repository.find_all_by_customer_id(id)
+  end
+
   def count
     @customers.count
   end
-
 end
