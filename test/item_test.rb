@@ -1,13 +1,38 @@
-require './test/test_helper'
+require_relative 'test_helper'
 require_relative '../lib/item'
 
 class ItemTest < Minitest::Test
   def setup
-    @item = Item.new(id: '4', name: 'Item Nemo Facere')
+    @item = Item.new(data, self)
   end
 
-  def test_a_item_has_attributes
-    assert_equal '4', @item.id
-    assert_equal 'Item Nemo Facere', @item.name
+  def data
+    { :id=>          '1',
+      :name=>        'Item Qui Esse',
+      :description=> 'Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.',
+      :unit_price=>  '75107',
+      :merchant_id=> '1',
+      :created_at=>  '2012-03-27 14:53:59 UTC',
+      :updated_at=>  '2012-03-27 14:53:59 UTC'
+    }
+  end
+
+  def test_an_item_has_attributes
+    @item.id
+    @item.name
+    @item.description
+    @item.unit_price
+    @item.merchant_id
+    @item.created_at
+    @item.updated_at
+  end
+
+  def test_an_item_knows_its_attributes
+    assert_equal '1', @item.id
+    assert_equal 'Item Qui Esse', @item.name
+    assert_equal '75107', @item.unit_price
+    assert_equal '1', @item.merchant_id
+    assert_equal '2012-03-27 14:53:59 UTC', @item.created_at
+    assert_equal '2012-03-27 14:53:59 UTC', @item.updated_at
   end
 end
