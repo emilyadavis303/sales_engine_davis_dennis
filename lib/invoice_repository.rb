@@ -1,45 +1,51 @@
 require 'csv'
-require_relative '../lib/invoice'
-require_relative '../lib/parser'
+require_relative 'invoice'
+require_relative 'parser'
 
 class InvoiceRepository
-  attr_reader   :invoices, :engine
+  attr_reader   :invoices,
+                :engine
 
   def initialize(engine, data_path='./data/')
     @invoices = Parser.new.parse(data_path + 'invoices.csv', Invoice, self)
-    @engine = engine
+    @engine   = engine
   end
 
   def random
-    @invoices.shuffle.first
+    invoices.shuffle.first
   end
 
   def all
-    @invoices
+    invoices
   end
 
   def find_by_status(status)
-    @invoices.find {
+    invoices.find {
       |invoice| invoice.status == status
     }
   end
 
   def find_all_by_status(status)
-    @invoices.find_all {
+    invoices.find_all {
       |invoice| invoice.status == status
-
     }
   end
 
   def find_by_id(id)
-    @invoices.find {
+    invoices.find {
       |invoice| invoice.id.to_s == id.to_s
     }
   end
 
   def find_all_by_merchant_id(merchant_id)
-    @invoices.find_all {
+    invoices.find_all {
       |invoice| invoice.merchant_id == merchant_id
+    }
+  end
+
+  def find_all_by_customer_id(customer_id)
+    invoices.find_all {
+      |invoice| invoice.customer_id == customer_id
     }
   end
 
@@ -49,12 +55,6 @@ class InvoiceRepository
 
   def transactions(id)
     engine.transaction_repository.find_all_by_invoice_id(id)
-  end
-
-  def find_all_by_customer_id(customer_id)
-    @invoices.find_all {
-      |invoice| invoice.customer_id == customer_id
-    }
   end
 
   def customer(customer_id)
@@ -73,6 +73,6 @@ class InvoiceRepository
   end
 
   def count
-    @invoices.count
+    invoices.count
   end
 end

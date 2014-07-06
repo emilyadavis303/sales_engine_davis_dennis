@@ -1,14 +1,14 @@
 require 'csv'
-require_relative '../lib/merchant'
-require_relative '../lib/parser'
-require 'pry'
+require_relative 'merchant'
+require_relative 'parser'
 
 class MerchantRepository
-  attr_reader   :merchants, :engine
+  attr_reader   :merchants,
+                :engine
 
   def initialize(engine, data_path='./data/')
     @merchants = Parser.new.parse(data_path + 'merchants.csv', Merchant, self)
-    @engine = engine
+    @engine    = engine
   end
 
   def random
@@ -37,15 +37,15 @@ class MerchantRepository
     }
   end
 
-  def count
-    merchants.count
-  end
-
   def items(id)
     engine.item_repository.find_all_by_merchant_id(id)
   end
 
   def invoices(id)
     engine.invoice_repository.find_all_by_merchant_id(id)
+  end
+
+  def count
+    merchants.count
   end
 end

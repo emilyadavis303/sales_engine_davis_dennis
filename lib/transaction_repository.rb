@@ -1,43 +1,44 @@
 require 'csv'
-require_relative '../lib/transaction'
-require_relative '../lib/parser'
+require_relative 'transaction'
+require_relative 'parser'
 
 class TransactionRepository
-  attr_reader :transactions, :engine
+  attr_reader :transactions,
+              :engine
 
   def initialize(engine, data_path='./data/')
     @transactions = Parser.new.parse(data_path + 'transactions.csv', Transaction, self)
-    @engine = engine
+    @engine       = engine
   end
 
   def random
-    @transactions.shuffle.first
+    transactions.shuffle.first
   end
 
   def all
-    @transactions
+    transactions
   end
 
   def find_by_credit_card_number(number)
-    @transactions.find {
+    transactions.find {
       |transaction| transaction.credit_card_number == number
     }
   end
 
   def find_all_by_result(result)
-    @transactions.find_all { |transaction|
-      transaction.result.downcase == result.downcase
+    transactions.find_all {
+      |transaction| transaction.result.downcase == result.downcase
     }
   end
 
   def find_by_id(id)
-    @transactions.find {
+    transactions.find {
       |transaction| transaction.id.to_s == id.to_s
     }
   end
 
   def find_all_by_invoice_id(invoice_id)
-    @transactions.find_all {
+    transactions.find_all {
       |transaction| transaction.invoice_id == invoice_id
     }
   end
@@ -47,6 +48,6 @@ class TransactionRepository
   end
 
   def count
-    @transactions.count
+    transactions.count
   end
 end
