@@ -51,12 +51,6 @@ class InvoiceRepository
     engine.transaction_repository.find_all_by_invoice_id(id)
   end
 
-  # def items_for_invoice(id)
-  #   engine.invoice_item_repository.item_for_invoice_items(id).collect do |ii|
-  #     ii.item
-  #   end
-  # end
-
   def find_all_by_customer_id(customer_id)
     @invoices.find_all {
       |invoice| invoice.customer_id == customer_id
@@ -65,6 +59,17 @@ class InvoiceRepository
 
   def customer(customer_id)
     engine.customer_repository.find_by_id(customer_id)
+  end
+
+  def items(id)
+    list_of_ii = invoice_items(id)
+    list_of_ii.map do |ii|
+      engine.item_repository.find_by_id(ii.item_id)
+    end
+  end
+
+  def merchant(merchant_id)
+    engine.merchant_repository.find_by_id(merchant_id)
   end
 
   def count

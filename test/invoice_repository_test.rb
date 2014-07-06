@@ -35,7 +35,6 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_returns_correct_number_of_transactions_for_invoice
     results = @repo.transactions('2')
     assert 3, results.count
-
   end
 
   def test_returns_correct_number_of_invoice_items_for_invoice
@@ -48,10 +47,15 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 'Ramona', result.first_name
   end
 
-  # def test_returns_collection_of_items_for_invoice
-  #   skip
-  #   results = @repo.items_for_invoice('1')
-  #   assert_equal 8, results.count
-  #   assert results.include?('Item Autem Minima')
-  # end
+  def test_it_can_find_a_merchant_associated_with_transaction
+    result = @repo.merchant('3')
+    assert_equal 'Willms and Sons', result.name
+  end
+
+  def test_returns_collection_of_items_for_invoice
+    results = @repo.items('1')
+
+    assert_equal 9, results.count
+    assert results.map(&:name).include? 'Item Quae Dolore'
+  end
 end

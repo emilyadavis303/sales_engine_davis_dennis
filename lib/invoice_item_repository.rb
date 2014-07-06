@@ -52,6 +52,17 @@ class InvoiceItemRepository
     engine.item_repository.find_by_id(item_id)
   end
 
+  def items(invoice_id, item_id)
+    invoice_id = find_all_by_invoice_id(invoice_id)
+    apples = engine.item_repository.find_by_id(item_id)
+
+    purple.collect do
+      |p|  p == apples
+    end
+
+    purple
+  end
+
   def invoice(invoice_id)
     engine.invoice_repository.find_by_id(invoice_id)
   end
