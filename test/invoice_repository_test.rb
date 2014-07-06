@@ -57,5 +57,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
     assert_equal 9, results.count
     assert results.map(&:name).include? 'Item Quae Dolore'
+    assert results.map(&:name).include? 'Item Nulla Aut'
+    assert results.map(&:id).include? '539'
   end
 end
