@@ -29,6 +29,6 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def test_can_find_by_status
     result = @repo.find_by_id(8)
-    assert_equal '38', result.merchant_id
+    assert_equal 38, result.merchant_id
   end
 end

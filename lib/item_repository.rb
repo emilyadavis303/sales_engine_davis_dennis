@@ -44,14 +44,6 @@ class ItemRepository
     }
   end
 
-  def invoice_items(id)
-    engine.invoice_item_repository.find_all_by_item_id(id)
-  end
-
-  def merchant(merchant_id)
-    engine.merchant_repository.find_by_id(merchant_id)
-  end
-
   def count
     items.count
   end
