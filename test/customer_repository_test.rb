@@ -6,9 +6,9 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository
 
   def setup
-    engine = SalesEngine.new
-    engine.startup('test/fixtures/')
-    @repo ||= CustomerRepository.new(engine, 'test/fixtures/')
+    engine = SalesEngine.new('test/fixtures')
+    engine.startup
+    @repo ||= CustomerRepository.new(engine, 'test/fixtures')
   end
 
   def test_it_exists

@@ -4,9 +4,9 @@ require_relative '../lib/sales_engine'
 
 class TransactionRepositoryTest < Minitest::Test
   def setup
-    engine = SalesEngine.new
-    engine.startup('test/fixtures/')
-    @repo ||= TransactionRepository.new(engine, 'test/fixtures/')
+    engine = SalesEngine.new('test/fixtures')
+    engine.startup
+    @repo ||= TransactionRepository.new(engine, 'test/fixtures')
   end
 
   def test_it_exists

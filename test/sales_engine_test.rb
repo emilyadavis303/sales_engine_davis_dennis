@@ -4,8 +4,8 @@ require_relative '../lib/sales_engine'
 class SalesEngineTest < Minitest::Test
   def setup
      @repo ||= begin
-       engine = SalesEngine.new
-       engine.startup('./test/fixtures/')
+       engine = SalesEngine.new('./test/fixtures')
+       engine.startup
        engine.merchant_repository
        engine.item_repository
        engine.invoice_repository
@@ -16,9 +16,7 @@ class SalesEngineTest < Minitest::Test
    end
 
   def test_it_exists
-    engine = SalesEngine.new
-
-    assert engine
+    assert @repo
   end
 
   # def test_it_loads_the_file

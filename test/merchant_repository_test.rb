@@ -5,9 +5,9 @@ require 'pry'
 
 class MerchantRepositoryTest < Minitest::Test
   def setup
-    engine = SalesEngine.new
-    engine.startup('test/fixtures/')
-    @repo ||= MerchantRepository.new(engine, 'test/fixtures/')
+    engine = SalesEngine.new('test/fixtures')
+    engine.startup
+    @repo ||= MerchantRepository.new(engine, 'test/fixtures')
   end
 
   def test_it_exists
