@@ -13,13 +13,17 @@ class SalesEngine
               :customer_repository,
               :transaction_repository
 
-  def startup(data_path)
-    @merchant_repository     = MerchantRepository.new(self, data_path)
-    @item_repository         = ItemRepository.new(self, data_path)
-    @invoice_repository      = InvoiceRepository.new(self, data_path)
-    @invoice_item_repository = InvoiceItemRepository.new(self, data_path)
-    @customer_repository     = CustomerRepository.new(self, data_path)
-    @transaction_repository  = TransactionRepository.new(self, data_path)
+  def initialize(data_path)
+    @data_path = data_path
+  end
+
+  def startup
+    @merchant_repository     = MerchantRepository.new(self, @data_path)
+    @item_repository         = ItemRepository.new(self, @data_path)
+    @invoice_repository      = InvoiceRepository.new(self, @data_path)
+    @invoice_item_repository = InvoiceItemRepository.new(self, @data_path)
+    @customer_repository     = CustomerRepository.new(self, @data_path)
+    @transaction_repository  = TransactionRepository.new(self, @data_path)
   end
 
 end

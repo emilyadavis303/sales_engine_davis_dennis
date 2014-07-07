@@ -6,8 +6,8 @@ class InvoiceItemRepository
   attr_reader   :invoice_items,
                 :engine
 
-  def initialize(engine, data_path='./data/')
-    @invoice_items = Parser.new.parse(data_path + 'invoice_items.csv', InvoiceItem, self)
+  def initialize(engine, data_path='./data')
+    @invoice_items = Parser.new.parse(data_path + '/invoice_items.csv', InvoiceItem, self)
     @engine        = engine
   end
 

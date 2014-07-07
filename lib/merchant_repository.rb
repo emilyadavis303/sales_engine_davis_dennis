@@ -6,8 +6,8 @@ class MerchantRepository
   attr_reader   :merchants,
                 :engine
 
-  def initialize(engine, data_path='./data/')
-    @merchants = Parser.new.parse(data_path + 'merchants.csv', Merchant, self)
+  def initialize(engine, data_path='./data')
+    @merchants = Parser.new.parse(data_path + '/merchants.csv', Merchant, self)
     @engine    = engine
   end
 

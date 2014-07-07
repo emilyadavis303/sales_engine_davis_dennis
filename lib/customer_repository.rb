@@ -6,8 +6,8 @@ class CustomerRepository
   attr_reader   :customers,
                 :engine
 
-  def initialize(engine, data_path='./data/')
-    @customers = Parser.new.parse(data_path + 'customers.csv', Customer, self)
+  def initialize(engine, data_path='./data')
+    @customers = Parser.new.parse(data_path + '/customers.csv', Customer, self)
     @engine    = engine
   end
 

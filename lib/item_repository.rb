@@ -7,8 +7,8 @@ class ItemRepository
   attr_reader   :items,
                 :engine
 
-  def initialize(engine, data_path='./data/')
-    @items  = Parser.new.parse(data_path + 'items.csv', Item, self)
+  def initialize(engine, data_path='./data')
+    @items  = Parser.new.parse(data_path + '/items.csv', Item, self)
     @engine = engine
   end
 
