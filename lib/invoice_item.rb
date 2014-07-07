@@ -13,7 +13,7 @@ class InvoiceItem
     @item_id       = row[:item_id].to_i
     @invoice_id    = row[:invoice_id].to_i
     @quantity      = row[:quantity]
-    @unit_price    = row[:unit_price]
+    @unit_price    = BigDecimal.new(row[:unit_price])/100
     @created_at    = row[:created_at]
     @updated_at    = row[:updated_at]
     @repo_ref      = repo_ref

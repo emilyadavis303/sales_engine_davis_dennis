@@ -28,7 +28,9 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 2, results.count
   end
 
-  # def test_find_by_unit_price
-  #   result = @repo.find_by_unit_price('')
-  # end
+  def test_find_by_unit_price
+    result = @repo.find_by_unit_price(BigDecimal.new("521.00"))
+
+    assert_equal 'Item Aliquid Occaecati', result.name
+  end
 end

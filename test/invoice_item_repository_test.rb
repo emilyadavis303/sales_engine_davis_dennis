@@ -20,7 +20,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_can_lookup_invoice_item_by_id
     result = @repo.find_by_item_id(534)
     assert_equal '6', result.quantity
-    assert_equal '76941', result.unit_price
+    assert_equal BigDecimal, result.unit_price.class
   end
 
   def test_can_lookup_item_by_quantity

@@ -1,7 +1,9 @@
+require 'bigdecimal'
 require_relative 'test_helper'
 require_relative '../lib/item'
 require_relative '../lib/item_repository'
 require_relative '../lib/sales_engine'
+require 'pry'
 
 class ItemTest < Minitest::Test
   def setup
@@ -32,7 +34,7 @@ class ItemTest < Minitest::Test
   def test_an_item_knows_its_attributes
     assert_equal 1, @item.id
     assert_equal 'Item Qui Esse', @item.name
-    assert_equal '75107', @item.unit_price
+    assert_equal BigDecimal, @item.unit_price.class
     assert_equal 1, @item.merchant_id
     assert_equal '2012-03-27 14:53:59 UTC', @item.created_at
     assert_equal '2012-03-27 14:53:59 UTC', @item.updated_at
