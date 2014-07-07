@@ -2,7 +2,6 @@ require_relative 'test_helper'
 require_relative '../lib/customer'
 require_relative '../lib/customer_repository'
 require_relative '../lib/sales_engine'
-require 'pry'
 
 class CustomerTest < Minitest::Test
   def setup

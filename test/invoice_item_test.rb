@@ -1,9 +1,12 @@
 require_relative 'test_helper'
 require_relative '../lib/invoice_item'
+require_relative '../lib/sales_engine'
+require_relative '../lib/invoice_repository'
+
 
 class InvoiceItemTest < Minitest::Test
   def setup
-    @invoice_item = InvoiceItem.new(data, self)
+    @invoice_item = InvoiceItem.new(data, @repo_ref)
   end
 
   def data
@@ -31,9 +34,26 @@ class InvoiceItemTest < Minitest::Test
     assert_equal 1, @invoice_item.id
     assert_equal 539, @invoice_item.item_id
     assert_equal 1, @invoice_item.invoice_id
-    assert_equal 5, @invoice_item.quantity
+    assert_equal '5', @invoice_item.quantity
     assert_equal '13635', @invoice_item.unit_price
     assert_equal '2012-03-27 14:54:09 UTC', @invoice_item.created_at
     assert_equal '2012-03-27 14:54:09 UTC', @invoice_item.updated_at
+  end
+
+  def test_returns_correct_item_for_invoice_items
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @invoice_item_test = sales_engine.invoice_item_repository.find_by_id(5)
+
+    result = @invoice_item_test.item
+    assert_equal 'Item Eius Et', result.name
+  end
+
+  def test_returns_correct_invoice_for_invoice_items
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @invoice_item_test = sales_engine.invoice_item_repository.find_by_id(5)
+    result = @invoice_item_test.invoice
+    assert_equal 26, result.merchant_id
   end
 end

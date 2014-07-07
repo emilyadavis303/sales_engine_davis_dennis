@@ -30,16 +30,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_can_lookup_item_by_invoice_id
     result = @repo.find_by_id(9)
-    assert_equal '1832', result.item_id
+    assert_equal 1832, result.item_id
   end
 
-  def test_returns_correct_item_for_invoice_items
-    result = @repo.item('9')
-    assert_equal 'Item Autem Minima', result.name
-  end
-
-  def test_returns_correct_invoice_for_invoice_items
-    result = @repo.invoice('9')
-    assert_equal '3', result.merchant_id
-  end
 end

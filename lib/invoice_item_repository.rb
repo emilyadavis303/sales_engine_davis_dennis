@@ -49,10 +49,6 @@ class InvoiceItemRepository
     }
   end
 
-  def invoice(invoice_id)
-    engine.invoice_repository.find_by_id(invoice_id)
-  end
-
   def count
     invoice_items.count
   end
