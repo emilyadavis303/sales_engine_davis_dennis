@@ -57,10 +57,6 @@ class InvoiceRepository
     engine.transaction_repository.find_all_by_invoice_id(id)
   end
 
-  def customer(customer_id)
-    engine.customer_repository.find_by_id(customer_id)
-  end
-
   def items(id)
     list_of_ii = invoice_items(id)
     list_of_ii.map do |ii|

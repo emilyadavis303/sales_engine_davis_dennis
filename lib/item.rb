@@ -8,11 +8,11 @@ class Item
               :updated_at
 
   def initialize(row, repo_ref)
-    @id          = row[:id]
+    @id          = row[:id].to_i
     @name        = row[:name]
     @description = row[:description]
     @unit_price  = row[:unit_price]
-    @merchant_id = row[:merchant_id]
+    @merchant_id = row[:merchant_id].to_i
     @created_at  = row[:created_at]
     @updated_at  = row[:updated_at]
     @repo_ref    = repo_ref

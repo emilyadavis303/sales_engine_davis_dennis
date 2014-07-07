@@ -4,7 +4,8 @@ class Invoice
               :merchant_id,
               :status,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo_ref
 
   def initialize(row, repo_ref)
     @id            = row[:id].to_i
@@ -14,6 +15,10 @@ class Invoice
     @created_at    = row[:created_at]
     @updated_at    = row[:updated_at]
     @repo_ref      = repo_ref
+  end
+
+  def customer
+    repo_ref.engine.customer_repository.find_by_id(@customer_id)
   end
 
 end

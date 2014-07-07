@@ -21,22 +21,11 @@ class MerchantRepositoryTest < Minitest::Test
   def test_can_find_a_single_merchant_by_name
     result = @repo.find_by_name('Osinski, Pollich and Koelpin')
     assert_equal 'Osinski, Pollich and Koelpin', result.name
-    assert_equal '8', result.id
+    assert_equal 8, result.id
   end
 
   def test_can_find_all_merchants_by_name
     results = @repo.find_all_by_name('Williamson Group')
-    assert_equal 2, results.count
-  end
-
-  def test_returns_correct_number_of_items
-    results = @repo.items('3')
-    assert_equal 4, results.count
-    # assert 'Item Autem Minima', results.find('Item Autem Minima')
-  end
-
-  def test_returns_correct_number_of_invoices_for_merchant
-    results = @repo.invoices('3')
     assert_equal 2, results.count
   end
 end
