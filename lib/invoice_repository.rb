@@ -33,7 +33,7 @@ class InvoiceRepository
 
   def find_by_id(id)
     invoices.find {
-      |invoice| invoice.id.to_s == id.to_s
+      |invoice| invoice.id == id
     }
   end
 
