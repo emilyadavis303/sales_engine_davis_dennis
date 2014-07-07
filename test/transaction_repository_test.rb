@@ -33,9 +33,4 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal '4844518708741275', result.credit_card_number
     assert_equal '6', result.invoice_id
   end
-
-  def test_it_can_find_invoice_for_transaction
-    result = @repo.invoice(4)
-    assert_equal '33', result.merchant_id
-  end
 end

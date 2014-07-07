@@ -34,6 +34,7 @@ class MerchantTest < Minitest::Test
     sales_engine = SalesEngine.new('test/fixtures')
     sales_engine.startup
     @merchant_test = sales_engine.merchant_repository.find_by_id(3)
+
     results = @merchant_test.items
     assert_equal 4, results.count
     # assert 'Item Autem Minima', results.find('Item Autem Minima')
@@ -43,6 +44,7 @@ class MerchantTest < Minitest::Test
     sales_engine = SalesEngine.new('test/fixtures')
     sales_engine.startup
     @merchant_test = sales_engine.merchant_repository.find_by_id(3)
+
     results = @merchant_test.invoices
     assert_equal 2, results.count
   end

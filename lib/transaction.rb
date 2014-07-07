@@ -19,4 +19,8 @@ class Transaction
     @repo_ref                    = repo_ref
   end
 
+  def invoice
+    repo_ref.engine.invoice_repository.find_by_id(@invoice_id)
+  end
+
 end
