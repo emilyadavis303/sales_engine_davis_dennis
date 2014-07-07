@@ -49,10 +49,6 @@ class InvoiceItemRepository
     }
   end
 
-  def item(item_id)
-    engine.item_repository.find_by_id(item_id)
-  end
-
   def invoice(invoice_id)
     engine.invoice_repository.find_by_id(invoice_id)
   end

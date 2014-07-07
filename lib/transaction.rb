@@ -5,11 +5,12 @@ class Transaction
               :credit_card_expiration_date,
               :result,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo_ref
 
   def initialize(row, repo_ref)
-    @id                          = row[:id]
-    @invoice_id                  = row[:invoice_id]
+    @id                          = row[:id].to_i
+    @invoice_id                  = row[:invoice_id].to_i
     @credit_card_number          = row[:credit_card_number]
     @credit_card_expiration_date = row[:credit_card_expiration_date]
     @result                      = row[:result]

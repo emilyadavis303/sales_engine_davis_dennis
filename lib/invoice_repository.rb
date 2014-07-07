@@ -49,25 +49,6 @@ class InvoiceRepository
     }
   end
 
-  def invoice_items(id)
-    engine.invoice_item_repository.find_all_by_invoice_id(id)
-  end
-
-  def transactions(id)
-    engine.transaction_repository.find_all_by_invoice_id(id)
-  end
-
-  def items(id)
-    list_of_ii = invoice_items(id)
-    list_of_ii.map do |ii|
-      engine.item_repository.find_by_id(ii.item_id)
-    end
-  end
-
-  def merchant(merchant_id)
-    engine.merchant_repository.find_by_id(merchant_id)
-  end
-
   def count
     invoices.count
   end

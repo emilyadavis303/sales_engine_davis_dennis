@@ -5,17 +5,21 @@ class InvoiceItem
               :quantity,
               :unit_price,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo_ref
 
   def initialize(row, repo_ref)
-    @id            = row[:id]
-    @item_id       = row[:item_id]
-    @invoice_id    = row[:invoice_id]
-    @quantity      = row[:quantity]
+    @id            = row[:id].to_i
+    @item_id       = row[:item_id].to_i
+    @invoice_id    = row[:invoice_id].to_i
+    @quantity      = row[:quantity].to_i
     @unit_price    = row[:unit_price]
     @created_at    = row[:created_at]
     @updated_at    = row[:updated_at]
     @repo_ref      = repo_ref
   end
 
+  def item
+    repo_ref.engine.item_repository.find_by_id(@item_id)
+  end
 end

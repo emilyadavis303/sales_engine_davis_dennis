@@ -21,4 +21,23 @@ class Invoice
     repo_ref.engine.customer_repository.find_by_id(@customer_id)
   end
 
+  def transactions
+    repo_ref.engine.transaction_repository.find_all_by_invoice_id(@id)
+  end
+
+  def items
+    list_of_ii = invoice_items
+    list_of_ii.map do |ii|
+      repo_ref.engine.item_repository.find_by_id(ii.item_id)
+    end
+  end
+
+  def merchant
+    repo_ref.engine.merchant_repository.find_by_id(@merchant_id)
+  end
+
+  def invoice_items
+    repo_ref.engine.invoice_item_repository.find_all_by_invoice_id(@id)
+  end
+
 end

@@ -1,9 +1,12 @@
 require_relative 'test_helper'
 require_relative '../lib/invoice'
+require_relative '../lib/invoice_repository'
+require_relative '../lib/sales_engine'
+
 
 class InvoiceTest < Minitest::Test
   def setup
-    @invoice = Invoice.new(data, self)
+    @invoice = Invoice.new(data, @repo_ref)
   end
 
   def data
@@ -26,11 +29,55 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_an_invoice_knows_its_attributes
-    assert_equal '2', @invoice.id
-    assert_equal '1', @invoice.customer_id
-    assert_equal '75', @invoice.merchant_id
+    assert_equal 2, @invoice.id
+    assert_equal 1, @invoice.customer_id
+    assert_equal 75, @invoice.merchant_id
     assert_equal 'shipped', @invoice.status
     assert_equal '2012-03-12 05:54:09 UTC', @invoice.created_at
     assert_equal '2012-03-12 05:54:09 UTC', @invoice.updated_at
+  end
+
+  def test_returns_correct_number_of_transactions_for_invoice
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @invoice_test = sales_engine.invoice_repository.find_by_id(2)
+    results = @invoice_test.transactions
+    assert 3, results.count
+  end
+
+  def test_returns_correct_number_of_invoice_items_for_invoice
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @invoice_test = sales_engine.invoice_repository.find_by_id(1)
+    results = @invoice_test.invoice_items
+    assert_equal 9, results.count
+  end
+
+  def test_it_can_find_customer_by_id
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @invoice_test = sales_engine.invoice_repository.find_by_id(10)
+    result = @invoice_test.customer
+    assert_equal 'Mariah', result.first_name
+  end
+
+  def test_it_can_find_a_merchant_associated_with_transaction
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @invoice_test = sales_engine.invoice_repository.find_by_id(5)
+    result = @invoice_test.merchant
+    assert_equal 'Willms and Sons', result.name
+  end
+
+  def test_returns_collection_of_items_for_invoice
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @invoice_test = sales_engine.invoice_repository.find_by_id(1)
+    results = @invoice_test.items
+
+    assert_equal 9, results.count
+    assert results.map(&:name).include? 'Item Quae Dolore'
+    assert results.map(&:name).include? 'Item Nulla Aut'
+    assert results.map(&:id).include? 539
   end
 end
