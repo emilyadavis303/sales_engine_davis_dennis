@@ -48,7 +48,7 @@ class MerchantTest < Minitest::Test
     @merchant_test = sales_engine.merchant_repository.find_by_id(3)
 
     results = @merchant_test.invoices
-    assert_equal 2, results.count
+    assert_equal 3, results.count
   end
 
   def test_returns_total_revenue_for_a_merchant_across_all_transactions
@@ -66,9 +66,11 @@ class MerchantTest < Minitest::Test
   end
 
   def test_returns_customer_with_most_successful_transactions
-    @merchant_test = sales_engine.merchant_repository.find_by_name('Cummings-Thiel')
-    skip
-    assert
+    @merchant_test = sales_engine.merchant_repository.find_by_name('Willms and Sons')
+
+    result = @merchant_test.favorite_customer
+
+    assert_equal 'Cecelia', result.first_name
   end
 
   def test_customers_with_pending_invoices_returns_a_collection_of_Customer_instances_which_have_unpaid_invoices
