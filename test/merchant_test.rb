@@ -66,4 +66,12 @@ class MerchantTest < Minitest::Test
     result = @merchant_test.revenue('2012-03-24 15:54:10 UTC')
     assert_equal BigDecimal("186.71").to_s, result.to_s
   end
+
+  def test_returns_customer_with_most_successful_transactions
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @merchant_test = sales_engine.merchant_repository.find_by_name('Cummings-Thiel')
+
+    assert
+  end
 end

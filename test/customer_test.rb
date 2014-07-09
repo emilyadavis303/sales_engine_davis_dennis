@@ -38,6 +38,6 @@ class CustomerTest < Minitest::Test
     sales_engine.startup
     @customer_test = sales_engine.customer_repository.find_by_id(5)
     results = @customer_test.invoices
-    assert_equal 2, results.count
+    assert_equal 4, results.count
   end
 end

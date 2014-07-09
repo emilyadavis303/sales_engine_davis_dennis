@@ -30,4 +30,11 @@ class Merchant
     end
     successful_invoices.map(&:total).reduce(:+)
   end
+
+  def favorite_customer
+    #gather invoices for merchant
+    #filter those for success
+    #filter for customer with largest number if invoices
+    #return customer object (find by id)
+  end
 end
