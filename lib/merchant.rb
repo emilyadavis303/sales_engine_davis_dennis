@@ -21,10 +21,13 @@ class Merchant
     repo_ref.engine.invoice_repository.find_all_by_merchant_id(@id)
   end
 
-  def revenue
-    successful_invoices = invoices.select {|invoice| invoice.successful?}
+  def revenue(date=nil)
+    if date != nil
+      invoices_for_date = invoices.select {|invoice| invoice.created_at == date}
+      successful_invoices = invoices_for_date.select {|invoice| invoice.successful?}
+    else
+      successful_invoices = invoices.select {|invoice| invoice.successful?}
+    end
     successful_invoices.map(&:total).reduce(:+)
-    # successful_invoices.reduce(0) {|total, invoice| total += invoice.total}
   end
-
 end

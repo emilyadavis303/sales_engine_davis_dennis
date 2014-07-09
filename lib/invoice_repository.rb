@@ -1,4 +1,6 @@
 require 'csv'
+require 'date'
+require 'time'
 require_relative 'invoice'
 require_relative 'parser'
 
@@ -50,6 +52,12 @@ class InvoiceRepository
   def find_all_by_customer_id(customer_id)
     invoices.find_all {
       |invoice| invoice.customer_id == customer_id
+    }
+  end
+
+  def find_all_by_date(created_at)
+    invoices.find_all {
+      |invoice| invoice.created_at == created_at
     }
   end
 

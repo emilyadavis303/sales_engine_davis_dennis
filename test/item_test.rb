@@ -45,7 +45,7 @@ class ItemTest < Minitest::Test
     @item_test = sales_engine.item_repository.find_by_id(4)
 
     results = @item_test.invoice_items
-    assert_equal 3, results.count
+    assert_equal 6, results.count
   end
 
   def test_returns_a_merchant_for_item

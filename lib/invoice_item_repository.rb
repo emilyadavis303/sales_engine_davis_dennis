@@ -2,7 +2,6 @@ require 'csv'
 require 'bigdecimal'
 require_relative 'invoice_item'
 require_relative 'parser'
-require 'pry'
 
 class InvoiceItemRepository
   attr_reader   :invoice_items,
@@ -55,13 +54,13 @@ class InvoiceItemRepository
     }
   end
 
-  def invoice_total(invoice_id)
-    invoices = find_all_by_invoice_id(invoice_id)
-
-    invoices.reduce(0) do |grand_total, invoice|
-      grand_total += invoice.quantity.to_i * invoice.unit_price
-    end
-  end
+  # def invoice_total(invoice_id)
+  #   invoices = find_all_by_invoice_id(invoice_id)
+  #
+  #   invoices.reduce(0) do |grand_total, invoice|
+  #     grand_total += invoice.quantity.to_i * invoice.unit_price
+  #   end
+  # end
 
   def count
     invoice_items.count

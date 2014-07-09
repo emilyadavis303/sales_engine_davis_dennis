@@ -33,14 +33,14 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 1832, result.item_id
   end
 
-  def test_can_calculate_an_invoice_total_for_one_line
-    result = @repo.invoice_total(589)
-    assert_equal BigDecimal("74.36"), result
-  end
-
-  def test_can_calculate_an_invoice_total_for_multiple_lines
-    result = @repo.invoice_total(2)
-    assert_equal BigDecimal("3146.02"), result
-  end
+  # def test_can_calculate_an_invoice_total_for_one_line
+  #   result = @repo.invoice_total(589)
+  #   assert_equal BigDecimal("74.36"), result
+  # end
+  #
+  # def test_can_calculate_an_invoice_total_for_multiple_lines
+  #   result = @repo.invoice_total(2)
+  #   assert_equal BigDecimal("3146.02"), result
+  # end
 
 end
