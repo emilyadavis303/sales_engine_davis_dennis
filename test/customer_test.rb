@@ -52,4 +52,11 @@ class CustomerTest < Minitest::Test
 
     assert_equal 'Cummings-Thiel', result.name
   end
+
+  def test_returns_all_transactions_for_a_customer
+    @customer_test = sales_engine.customer_repository.find_by_id(5)
+    results = @customer_test.transactions
+
+    assert_equal 3, results.count
+  end
 end

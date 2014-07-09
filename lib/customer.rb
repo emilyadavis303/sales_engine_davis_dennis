@@ -21,6 +21,14 @@ class Customer
     repo_ref.engine.invoice_repository.find_all_by_customer_id(@id)
   end
 
+  def transactions
+    customer_invoices = invoices
+    transactions = customer_invoices.collect do |invoice|
+      repo_ref.engine.transaction_repository.find_all_by_invoice_id(invoice.id)
+    end
+    transactions.flatten
+  end
+
 
   def favorite_merchant
     scoped_invoices  = invoices.select(&:successful?)
