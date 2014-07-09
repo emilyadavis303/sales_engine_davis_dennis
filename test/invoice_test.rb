@@ -80,4 +80,13 @@ class InvoiceTest < Minitest::Test
     assert results.map(&:name).include? 'Item Nulla Aut'
     assert results.map(&:id).include? 539
   end
+
+  def test_returns_invoices_with_successful_transactions
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @invoice_test = sales_engine.invoice_repository.find_by_id(1)
+    results = @invoice_test.successful_transactions
+
+    assert_equal 1, results.count
+  end
 end

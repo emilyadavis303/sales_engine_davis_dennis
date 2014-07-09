@@ -25,6 +25,14 @@ class Invoice
     repo_ref.engine.transaction_repository.find_all_by_invoice_id(@id)
   end
 
+  def successful_transactions
+    transactions.select {|it| it.result == 'success'}
+  end
+
+  def successful?
+    successful_transactions.any?
+  end
+
   def items
     list_of_ii = invoice_items
     list_of_ii.map do |ii|
@@ -38,6 +46,10 @@ class Invoice
 
   def invoice_items
     repo_ref.engine.invoice_item_repository.find_all_by_invoice_id(@id)
+  end
+
+  def total
+    invoice_items.reduce(0) {|total, invoice_item| total += invoice_item.total}
   end
 
 end

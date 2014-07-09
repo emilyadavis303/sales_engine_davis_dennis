@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 class InvoiceItem
   attr_reader :id,
               :item_id,
@@ -25,6 +27,10 @@ class InvoiceItem
 
   def invoice
     repo_ref.engine.invoice_repository.find_by_id(@invoice_id)
+  end
+
+  def total
+    quantity.to_i * unit_price
   end
 
 end

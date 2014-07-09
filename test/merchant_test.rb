@@ -48,4 +48,13 @@ class MerchantTest < Minitest::Test
     results = @merchant_test.invoices
     assert_equal 2, results.count
   end
+
+  def test_returns_total_revenue_for_a_merchant_across_all_transactions
+    sales_engine = SalesEngine.new('test/fixtures')
+    sales_engine.startup
+    @merchant_test = sales_engine.merchant_repository.find_by_name('Willms and Sons')
+
+    result = @merchant_test.revenue
+    assert_equal BigDecimal("186.71").to_s, result.to_s
+  end
 end

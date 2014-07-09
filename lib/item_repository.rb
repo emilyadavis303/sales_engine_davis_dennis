@@ -12,6 +12,10 @@ class ItemRepository
     @engine = engine
   end
 
+  def inspect
+    "#<#{self.class} #{@items.size} rows>"
+  end
+
   def random
     items.shuffle.first
   end

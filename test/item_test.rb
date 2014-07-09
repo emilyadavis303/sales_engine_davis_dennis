@@ -34,7 +34,7 @@ class ItemTest < Minitest::Test
   def test_an_item_knows_its_attributes
     assert_equal 1, @item.id
     assert_equal 'Item Qui Esse', @item.name
-    assert_equal BigDecimal, @item.unit_price.class
+    assert_equal BigDecimal("751.07"), @item.unit_price
     assert_equal 1, @item.merchant_id
     assert_equal '2012-03-27 14:53:59 UTC', @item.created_at
     assert_equal '2012-03-27 14:53:59 UTC', @item.updated_at
@@ -57,4 +57,6 @@ class ItemTest < Minitest::Test
     result = @item_test.merchant
     assert_equal 'Schroeder-Jerde', result.name
   end
+
+
 end

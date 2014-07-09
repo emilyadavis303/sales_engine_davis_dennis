@@ -11,6 +11,10 @@ class MerchantRepository
     @engine    = engine
   end
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
   def random
     merchants.shuffle.first
   end

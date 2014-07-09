@@ -11,6 +11,10 @@ class TransactionRepository
     @engine       = engine
   end
 
+  def inspect
+    "#<#{self.class} #{@transactions.size} rows>"
+  end
+
   def random
     transactions.shuffle.first
   end
@@ -30,6 +34,18 @@ class TransactionRepository
       |transaction| transaction.result.downcase == result.downcase
     }
   end
+
+  def find_all_invoices_by_result(invoice_id, result)
+    transactions.find_all {
+      |transaction| transaction(invoice_id).result == result
+    }
+  end
+
+  # def find_result_by_merchant(merchant_invoices, result)
+  #   transactions.find_all {
+  #     |transaction| transaction.result.downcase == result.downcase
+  #   }
+  # end
 
   def find_by_id(id)
     transactions.find {

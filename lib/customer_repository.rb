@@ -11,6 +11,10 @@ class CustomerRepository
     @engine    = engine
   end
 
+  def inspect
+    "#<#{self.class} #{@customers.size} rows>"
+  end
+
   def random
     customers.shuffle.first
   end

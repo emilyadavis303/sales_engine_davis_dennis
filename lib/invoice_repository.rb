@@ -11,6 +11,10 @@ class InvoiceRepository
     @engine   = engine
   end
 
+  def inspect
+    "#<#{self.class} #{@invoices.size} rows>"
+  end
+
   def random
     invoices.shuffle.first
   end
