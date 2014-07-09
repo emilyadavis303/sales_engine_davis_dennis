@@ -25,7 +25,7 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_it_can_find_all_by_result
     result = @repo.find_all_by_result('success')
-    assert_equal 11, result.count
+    assert_equal 12, result.count
   end
 
   def test_it_can_find_a_transaction_by_id

@@ -35,8 +35,6 @@ class ItemTest < Minitest::Test
     assert_equal 'Item Qui Esse', @item.name
     assert_equal BigDecimal("751.07"), @item.unit_price
     assert_equal 1, @item.merchant_id
-    assert_equal '2012-03-27 14:53:59 UTC', @item.created_at
-    assert_equal '2012-03-27 14:53:59 UTC', @item.updated_at
   end
 
   def test_returns_correct_number_of_invoice_items_for_item

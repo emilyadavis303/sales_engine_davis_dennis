@@ -1,3 +1,5 @@
+require 'date'
+
 class Merchant
   attr_reader :id,
               :name,
@@ -8,8 +10,8 @@ class Merchant
   def initialize(row, repo_ref)
     @id           = row[:id].to_i
     @name         = row[:name]
-    @created_at   = row[:created_at]
-    @updated_at   = row[:updated_at]
+    @created_at   = Date.parse(row[:created_at])
+    @updated_at   = Date.parse(row[:updated_at])
     @repo_ref     = repo_ref
   end
 
@@ -23,13 +25,10 @@ class Merchant
 
   def revenue(date=nil)
     scoped_invoices = invoices.select(&:successful?)
-    date && scoped_invoices.select! { |invoice| invoice.created_at == date }
-    # zero = BigDecimal.new('0')
-    # <-- no tests on this one (i.e. a merchant with no invoices returns zero)
+    date && scoped_invoices.select! { |invoice| invoice.updated_at == date }
     scoped_invoices.map(&:total).reduce(:+)
   end
 
-  # returns the Customer who has conducted the most successful transactions
   def favorite_customer
     # gather invoices for merchant
     # filter those for success

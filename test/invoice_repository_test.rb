@@ -24,7 +24,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def test_can_find_all_by_status
     results = @repo.find_all_by_status('shipped')
-    assert_equal 13, results.count
+    assert_equal 15, results.count
   end
 
   def test_can_find_invoice_by_merchant_id
@@ -33,7 +33,9 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_invoices_for_a_specific_date
-    results = @repo.find_all_by_date('2012-03-24 15:54:10 UTC')
+    date = Date.parse('2012-03-24 15:54:10 UTC')
+    
+    results = @repo.find_all_by_date(date)
     assert_equal 3, results.count
   end
 end
