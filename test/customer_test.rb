@@ -8,6 +8,14 @@ class CustomerTest < Minitest::Test
     @customer = Customer.new(data, @repo_ref)
   end
 
+  def sales_engine
+    @sales_engine ||= begin
+      sales_engine = SalesEngine.new('test/fixtures')
+      sales_engine.startup
+      sales_engine
+    end
+  end
+
   def data
     { :id=>         '1',
       :first_name=> 'Joey',
@@ -32,10 +40,16 @@ class CustomerTest < Minitest::Test
   end
 
   def test_it_can_return_correct_number_of_invoices_for_customer
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @customer_test = sales_engine.customer_repository.find_by_id(5)
     results = @customer_test.invoices
+
     assert_equal 4, results.count
+  end
+
+  def test_returns_favorite_merchant
+    @customer_test = sales_engine.customer_repository.find_by_id(5)
+    result = @customer_test.favorite_merchant
+
+    assert_equal 'Cummings-Thiel', result.name
   end
 end
