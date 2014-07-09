@@ -24,8 +24,9 @@ class Merchant
   def revenue(date=nil)
     scoped_invoices = invoices.select(&:successful?)
     date && scoped_invoices.select! { |invoice| invoice.created_at == date }
-    zero = BigDecimal.new('0') # FIXME: <-- no tests on this one (i.e. a merchant with no invoices returns zero)
-    scoped_invoices.map(&:total).reduce(zero, :+)
+    # zero = BigDecimal.new('0')
+    # <-- no tests on this one (i.e. a merchant with no invoices returns zero)
+    scoped_invoices.map(&:total).reduce(:+)
   end
 
   # returns the Customer who has conducted the most successful transactions
@@ -36,10 +37,8 @@ class Merchant
     # return customer object (find by id)
   end
 
-  # self.invoices
   def customers_with_pending_invoices
-    require "pry"
-    binding.pry
-    invoices.first.successful_transactions
+    pending_invoices = invoices.select {|invoice| invoice.successful_transactions.none?}
+    pending_invoices.collect { |invoice| invoice.customer }
   end
 end

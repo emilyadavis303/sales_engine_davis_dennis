@@ -74,11 +74,9 @@ class MerchantTest < Minitest::Test
   end
 
   def test_customers_with_pending_invoices_returns_a_collection_of_Customer_instances_which_have_unpaid_invoices
-    merchant  = sales_engine.merchant_repository.find_by_id 86
-    customers = merchant.customers_with_pending_invoices
-    assert_equal 2, customers.size
-    assert_equal ['Logan', 'Mariah'], customers.map(&:first_name).sort
-    # Mariah only has failed invoices
-    # Logans has no invoices at all
+    @merchant_test = sales_engine.merchant_repository.find_by_name('Marvin Group')
+    results = @merchant_test.customers_with_pending_invoices
+    assert_equal 2, results.count
+    assert_equal ['Logan', 'Mariah'], results.map(&:first_name).sort
   end
 end
