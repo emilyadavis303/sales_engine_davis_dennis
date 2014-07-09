@@ -8,6 +8,14 @@ class MerchantTest < Minitest::Test
     @merchant = Merchant.new(data, @repo_ref)
   end
 
+  def sales_engine
+    @sales_engine ||= begin
+      sales_engine = SalesEngine.new('test/fixtures')
+      sales_engine.startup
+      sales_engine
+    end
+  end
+
   def data
     { :id=>         '1',
       :name=>       'Schroeder-Jerde',
@@ -31,8 +39,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_returns_correct_number_of_items
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @merchant_test = sales_engine.merchant_repository.find_by_id(3)
 
     results = @merchant_test.items
@@ -41,8 +47,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_returns_correct_number_of_invoices_for_merchant
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @merchant_test = sales_engine.merchant_repository.find_by_id(3)
 
     results = @merchant_test.invoices
@@ -50,8 +54,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_returns_total_revenue_for_a_merchant_across_all_transactions
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @merchant_test = sales_engine.merchant_repository.find_by_name('Willms and Sons')
 
     result = @merchant_test.revenue
@@ -59,8 +61,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_returns_total_revenue_for_a_merchant_on_particular_date
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @merchant_test = sales_engine.merchant_repository.find_by_name('Cummings-Thiel')
 
     result = @merchant_test.revenue('2012-03-24 15:54:10 UTC')
@@ -68,10 +68,7 @@ class MerchantTest < Minitest::Test
   end
 
   def test_returns_customer_with_most_successful_transactions
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @merchant_test = sales_engine.merchant_repository.find_by_name('Cummings-Thiel')
-
     assert
   end
 end
