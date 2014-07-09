@@ -22,13 +22,10 @@ class Merchant
   end
 
   def revenue(date=nil)
-    if date != nil
-      invoices_for_date = invoices.select {|invoice| invoice.created_at == date}
-      successful_invoices = invoices_for_date.select {|invoice| invoice.successful?}
-    else
-      successful_invoices = invoices.select {|invoice| invoice.successful?}
-    end
-    successful_invoices.map(&:total).reduce(:+)
+    scoped_invoices = invoices.select(&:successful?)
+    date && scoped_invoices.select! { |invoice| invoice.created_at == date }
+    zero = BigDecimal.new('0') # FIXME: <-- no tests on this one (i.e. a merchant with no invoices returns zero)
+    scoped_invoices.map(&:total).reduce(zero, :+)
   end
 
   def favorite_customer
