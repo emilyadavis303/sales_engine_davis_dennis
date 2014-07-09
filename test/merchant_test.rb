@@ -69,6 +69,16 @@ class MerchantTest < Minitest::Test
 
   def test_returns_customer_with_most_successful_transactions
     @merchant_test = sales_engine.merchant_repository.find_by_name('Cummings-Thiel')
+    skip
     assert
+  end
+
+  def test_customers_with_pending_invoices_returns_a_collection_of_Customer_instances_which_have_unpaid_invoices
+    merchant  = sales_engine.merchant_repository.find_by_id 86
+    customers = merchant.customers_with_pending_invoices
+    assert_equal 2, customers.size
+    assert_equal ['Logan', 'Mariah'], customers.map(&:first_name).sort
+    # Mariah only has failed invoices
+    # Logans has no invoices at all
   end
 end

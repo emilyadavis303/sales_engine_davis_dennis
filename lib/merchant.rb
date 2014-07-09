@@ -28,10 +28,18 @@ class Merchant
     scoped_invoices.map(&:total).reduce(zero, :+)
   end
 
+  # returns the Customer who has conducted the most successful transactions
   def favorite_customer
-    #gather invoices for merchant
-    #filter those for success
-    #filter for customer with largest number if invoices
-    #return customer object (find by id)
+    # gather invoices for merchant
+    # filter those for success
+    # filter for customer with largest number if invoices (Enumerable#group_by)
+    # return customer object (find by id)
+  end
+
+  # self.invoices
+  def customers_with_pending_invoices
+    require "pry"
+    binding.pry
+    invoices.first.successful_transactions
   end
 end
