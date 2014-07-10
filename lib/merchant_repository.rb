@@ -20,7 +20,7 @@ class MerchantRepository
   end
 
   def all
-    merchants
+    @merchants
   end
 
   def find_by_id(id)
@@ -39,6 +39,15 @@ class MerchantRepository
     merchants.find_all {
       |merchant| merchant.name == name
     }
+  end
+
+  def revenue(date)
+    # merchants.map {|merchant| merchant.revenue(date) }.compact.reduce(0, :+)
+
+    all_revenue = merchants.map { |merchant| merchant.revenue(date)}.compact
+
+    all_revenue.reduce(0, :+)
+    # { |total, merchant_rev| total += merchant_rev}
   end
 
   def count
