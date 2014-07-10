@@ -8,7 +8,8 @@ class InvoiceItemRepository
                 :engine
 
   def initialize(engine, data_path='./data')
-    @invoice_items = Parser.new.parse(data_path + '/invoice_items.csv', InvoiceItem, self)
+    @invoice_items =
+      Parser.new.parse(data_path + '/invoice_items.csv', InvoiceItem, self)
     @engine        = engine
   end
 

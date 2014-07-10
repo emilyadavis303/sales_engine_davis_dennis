@@ -7,7 +7,8 @@ class TransactionRepository
               :engine
 
   def initialize(engine, data_path='./data')
-    @transactions = Parser.new.parse(data_path + '/transactions.csv', Transaction, self)
+    @transactions =
+      Parser.new.parse(data_path + '/transactions.csv', Transaction, self)
     @engine       = engine
   end
 

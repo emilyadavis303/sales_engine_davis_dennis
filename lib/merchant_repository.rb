@@ -45,7 +45,7 @@ class MerchantRepository
     all_revenue = merchants.map do
       |merchant| merchant.revenue(date)
     end
-    
+
     all_revenue.compact.reduce(0, :+)
   end
 
