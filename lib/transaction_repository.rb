@@ -41,12 +41,6 @@ class TransactionRepository
     }
   end
 
-  # def find_result_by_merchant(merchant_invoices, result)
-  #   transactions.find_all {
-  #     |transaction| transaction.result.downcase == result.downcase
-  #   }
-  # end
-
   def find_by_id(id)
     transactions.find {
       |transaction| transaction.id.to_s == id.to_s

@@ -34,28 +34,28 @@ class CustomerTest < Minitest::Test
   end
 
   def test_a_customer_knows_its_attributes
-    assert_equal 1, @customer.id
-    assert_equal 'Joey', @customer.first_name
+    assert_equal 1,          @customer.id
+    assert_equal 'Joey',     @customer.first_name
     assert_equal 'Ondricka', @customer.last_name
   end
 
   def test_it_can_return_correct_number_of_invoices_for_customer
     @customer_test = sales_engine.customer_repository.find_by_id(5)
-    results = @customer_test.invoices
+    results        = @customer_test.invoices
 
     assert_equal 4, results.count
   end
 
   def test_returns_favorite_merchant
     @customer_test = sales_engine.customer_repository.find_by_id(5)
-    result = @customer_test.favorite_merchant
+    result         = @customer_test.favorite_merchant
 
     assert_equal 'Cummings-Thiel', result.name
   end
 
   def test_returns_all_transactions_for_a_customer
     @customer_test = sales_engine.customer_repository.find_by_id(5)
-    results = @customer_test.transactions
+    results        = @customer_test.transactions
 
     assert_equal 3, results.count
   end

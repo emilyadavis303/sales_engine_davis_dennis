@@ -20,6 +20,14 @@ class InvoiceItemTest < Minitest::Test
     }
   end
 
+  def sales_engine
+    @sales_engine ||= begin
+      sales_engine = SalesEngine.new('test/fixtures')
+      sales_engine.startup
+      sales_engine
+    end
+  end
+
   def test_an_invoice_item_has_attributes
     @invoice_item.id
     @invoice_item.item_id
@@ -31,27 +39,24 @@ class InvoiceItemTest < Minitest::Test
   end
 
   def test_an_invoice_item_knows_its_attributes
-    assert_equal 1, @invoice_item.id
-    assert_equal 539, @invoice_item.item_id
-    assert_equal 1, @invoice_item.invoice_id
-    assert_equal '5', @invoice_item.quantity
+    assert_equal 1,                    @invoice_item.id
+    assert_equal 539,                  @invoice_item.item_id
+    assert_equal 1,                    @invoice_item.invoice_id
+    assert_equal '5',                  @invoice_item.quantity
     assert_equal BigDecimal("136.35"), @invoice_item.unit_price
   end
 
   def test_returns_correct_item_for_invoice_items
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @invoice_item_test = sales_engine.invoice_item_repository.find_by_id(5)
+    result             = @invoice_item_test.item
 
-    result = @invoice_item_test.item
     assert_equal 'Item Eius Et', result.name
   end
 
   def test_returns_correct_invoice_for_invoice_items
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @invoice_item_test = sales_engine.invoice_item_repository.find_by_id(5)
-    result = @invoice_item_test.invoice
+    result             = @invoice_item_test.invoice
+
     assert_equal 26, result.merchant_id
   end
 end

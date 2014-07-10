@@ -25,42 +25,34 @@ class InvoiceItemRepository
   end
 
   def find_by_item_id(item_id)
-    invoice_items.find {
+    invoice_items.find do
       |item| item.item_id.to_s == item_id.to_s
-    }
+    end
   end
 
   def find_all_by_item_id(item_id)
-    invoice_items.find_all {
+    invoice_items.find_all do
       |item| item.item_id.to_s == item_id.to_s
-    }
+    end
   end
 
   def find_all_by_quantity(quantity)
-    invoice_items.find_all {
+    invoice_items.find_all do
       |item| item.quantity == quantity.to_s
-    }
+    end
   end
 
   def find_by_id(id)
-    invoice_items.find {
+    invoice_items.find do
       |item| item.id.to_s == id.to_s
-    }
+    end
   end
 
   def find_all_by_invoice_id(invoice_id)
-    invoice_items.find_all {
+    invoice_items.find_all do
       |item| item.invoice_id.to_s == invoice_id.to_s
-    }
+    end
   end
-
-  # def invoice_total(invoice_id)
-  #   invoices = find_all_by_invoice_id(invoice_id)
-  #
-  #   invoices.reduce(0) do |grand_total, invoice|
-  #     grand_total += invoice.quantity.to_i * invoice.unit_price
-  #   end
-  # end
 
   def count
     invoice_items.count

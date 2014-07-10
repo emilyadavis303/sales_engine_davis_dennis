@@ -19,12 +19,14 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_find_single_item_by_name
     result = @repo.find_by_name('Item Expedita Aliquam')
+
+    assert_equal 5,                       result.id
     assert_equal 'Item Expedita Aliquam', result.name
-    assert_equal 5, result.id
   end
 
   def test_find_all_by_name
     results = @repo.find_all_by_name('Item Autem Minima')
+
     assert_equal 2, results.count
   end
 

@@ -21,22 +21,20 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_can_find_a_customer_by_last_name
     result = @repo.find_by_last_name('Considine')
+
+    assert_equal 'Loyal',     result.first_name
     assert_equal 'Considine', result.last_name
-    assert_equal 'Loyal', result.first_name
   end
 
   def test_can_find_multiple_customers_by_first_name
     result = @repo.find_all_by_first_name('Joey')
+
     assert_equal 2, result.count
   end
 
   def test_can_find_a_customer_by_id
     result = @repo.find_by_id(9)
+
     assert_equal 'Fadel', result.last_name
   end
-
-  # def test_it_can_return_correct_number_of_invoices_for_customer
-  #   results = @repo.invoices(5)
-  #   assert_equal 2, results.count
-  # end
 end

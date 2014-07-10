@@ -19,28 +19,20 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_can_lookup_invoice_item_by_id
     result = @repo.find_by_item_id(534)
-    assert_equal '6', result.quantity
+
+    assert_equal '6',        result.quantity
     assert_equal BigDecimal, result.unit_price.class
   end
 
   def test_can_lookup_item_by_quantity
     result = @repo.find_all_by_quantity(6)
+
     assert_equal 2, result.count
   end
 
   def test_can_lookup_item_by_invoice_id
     result = @repo.find_by_id(9)
+
     assert_equal 1832, result.item_id
   end
-
-  # def test_can_calculate_an_invoice_total_for_one_line
-  #   result = @repo.invoice_total(589)
-  #   assert_equal BigDecimal("74.36"), result
-  # end
-  #
-  # def test_can_calculate_an_invoice_total_for_multiple_lines
-  #   result = @repo.invoice_total(2)
-  #   assert_equal BigDecimal("3146.02"), result
-  # end
-
 end

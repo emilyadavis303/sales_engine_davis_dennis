@@ -8,6 +8,14 @@ class TransactionTest < Minitest::Test
     @transaction = Transaction.new(data, @repo_ref)
   end
 
+  def sales_engine
+    @sales_engine ||= begin
+      sales_engine = SalesEngine.new('test/fixtures')
+      sales_engine.startup
+      sales_engine
+    end
+  end
+
   def data
     { :id=>                '1',
       :invoice_id=>        '1',
@@ -28,18 +36,16 @@ class TransactionTest < Minitest::Test
   end
 
   def test_a_transaction_knows_its_attributes
-    assert_equal 1, @transaction.id
-    assert_equal 1, @transaction.invoice_id
+    assert_equal 1,                  @transaction.id
+    assert_equal 1,                  @transaction.invoice_id
     assert_equal '4654405418249632', @transaction.credit_card_number
-    assert_equal 'success', @transaction.result
+    assert_equal 'success',          @transaction.result
   end
 
   def test_it_can_find_invoice_for_transaction
-    sales_engine = SalesEngine.new('test/fixtures')
-    sales_engine.startup
     @transaction_test = sales_engine.transaction_repository.find_by_id(3)
+    result            = @transaction_test.invoice
 
-    result = @transaction_test.invoice
     assert_equal 75, result.merchant_id
   end
 end

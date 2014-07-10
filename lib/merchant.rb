@@ -31,14 +31,20 @@ class Merchant
 
   def favorite_customer
     scoped_invoices  = invoices.select(&:successful?)
-    grouped_invoices = scoped_invoices.group_by { |invoice| invoice.customer_id }
-    customer_id      = grouped_invoices.max_by { |key, values| values.count }.first
+    grouped_invoices = scoped_invoices.group_by do
+      |invoice| invoice.customer_id
+    end
+
+    customer_id = grouped_invoices.max_by { |key, values| values.count }.first
 
     repo_ref.engine.customer_repository.find_by_id(customer_id)
   end
 
   def customers_with_pending_invoices
-    pending_invoices = invoices.select {|invoice| invoice.successful_transactions.none?}
+    pending_invoices = invoices.select do
+      |invoice| invoice.successful_transactions.none?
+    end
+
     pending_invoices.collect { |invoice| invoice.customer }
   end
 end

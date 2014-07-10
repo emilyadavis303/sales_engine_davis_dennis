@@ -24,30 +24,29 @@ class MerchantRepository
   end
 
   def find_by_id(id)
-    merchants.find {
+    merchants.find do
       |merchant| merchant.id.to_s == id.to_s
-    }
+    end
   end
 
   def find_by_name(name)
-    merchants.find {
+    merchants.find do
       |merchant| merchant.name == name
-    }
+    end
   end
 
   def find_all_by_name(name)
-    merchants.find_all {
+    merchants.find_all do
       |merchant| merchant.name == name
-    }
+    end
   end
 
   def revenue(date)
-    # merchants.map {|merchant| merchant.revenue(date) }.compact.reduce(0, :+)
-
-    all_revenue = merchants.map { |merchant| merchant.revenue(date)}.compact
-
-    all_revenue.reduce(0, :+)
-    # { |total, merchant_rev| total += merchant_rev}
+    all_revenue = merchants.map do
+      |merchant| merchant.revenue(date)
+    end
+    
+    all_revenue.compact.reduce(0, :+)
   end
 
   def count

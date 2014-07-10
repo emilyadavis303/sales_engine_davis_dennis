@@ -32,8 +32,11 @@ class Customer
 
   def favorite_merchant
     scoped_invoices  = invoices.select(&:successful?)
-    grouped_invoices = scoped_invoices.group_by { |invoice| invoice.merchant_id }
-    merchant_id      = grouped_invoices.max_by { |key, values| values.count }.first
+    grouped_invoices = scoped_invoices.group_by do
+      |invoice| invoice.merchant_id
+    end
+
+    merchant_id = grouped_invoices.max_by { |key, values| values.count }.first
 
     repo_ref.engine.merchant_repository.find_by_id(merchant_id)
   end
