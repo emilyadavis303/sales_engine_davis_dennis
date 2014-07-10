@@ -23,15 +23,14 @@ class InvoiceItem
   end
 
   def item
-    repo_ref.engine.item_repository.find_by_id(@item_id)
+    repo_ref.engine.item_repository.find_by_id(item_id)
   end
 
   def invoice
-    repo_ref.engine.invoice_repository.find_by_id(@invoice_id)
+    repo_ref.engine.invoice_repository.find_by_id(invoice_id)
   end
 
   def total
     quantity.to_i * unit_price
   end
-
 end

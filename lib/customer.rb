@@ -18,27 +18,21 @@ class Customer
   end
 
   def invoices
-    repo_ref.engine.invoice_repository.find_all_by_customer_id(@id)
+    repo_ref.engine.invoice_repository.find_all_by_customer_id(id)
   end
 
   def transactions
-    customer_invoices = invoices
-    transactions = customer_invoices.collect do |invoice|
+    invoices.flat_map do |invoice|
       repo_ref.engine.transaction_repository.find_all_by_invoice_id(invoice.id)
     end
-    transactions.flatten
   end
 
-
   def favorite_merchant
-    scoped_invoices  = invoices.select(&:successful?)
-    grouped_invoices = scoped_invoices.group_by do
-      |invoice| invoice.merchant_id
-    end
-
-    merchant_id = grouped_invoices.max_by { |key, values| values.count }.first
+    merchant_id = invoices.select(&:successful?)
+                          .group_by(&:merchant_id)
+                          .max_by { |key, values| values.count }
+                          .first
 
     repo_ref.engine.merchant_repository.find_by_id(merchant_id)
   end
-
 end
