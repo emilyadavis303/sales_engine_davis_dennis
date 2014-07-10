@@ -6,47 +6,39 @@ class MerchantRepository
   attr_reader   :merchants,
                 :engine
 
-  def initialize(engine, data_path='./data')
+  def initialize(engine, data_path)
     @merchants = Parser.new.parse(data_path + '/merchants.csv', Merchant, self)
     @engine    = engine
   end
 
   def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
+    "#<#{self.class} #{merchants.size} rows>"
   end
 
   def random
-    merchants.shuffle.first
+    merchants.sample
   end
 
   def all
-    @merchants
+    merchants
   end
 
   def find_by_id(id)
-    merchants.find do
-      |merchant| merchant.id.to_s == id.to_s
-    end
+    merchants.find { |merchant| merchant.id.to_s == id.to_s }
   end
 
   def find_by_name(name)
-    merchants.find do
-      |merchant| merchant.name == name
-    end
+    merchants.find { |merchant| merchant.name == name }
   end
 
   def find_all_by_name(name)
-    merchants.find_all do
-      |merchant| merchant.name == name
-    end
+    merchants.find_all { |merchant| merchant.name == name }
   end
 
   def revenue(date)
-    all_revenue = merchants.map do
-      |merchant| merchant.revenue(date)
-    end
-
-    all_revenue.compact.reduce(0, :+)
+    merchants.map { |merchant| merchant.revenue(date) }
+             .compact
+             .reduce(0, :+)
   end
 
   def count

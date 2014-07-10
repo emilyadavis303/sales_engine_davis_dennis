@@ -16,35 +16,40 @@ class Merchant
   end
 
   def items
-    repo_ref.engine.item_repository.find_all_by_merchant_id(@id)
+    repo_ref.engine.item_repository.find_all_by_merchant_id(id)
   end
 
   def invoices
-    repo_ref.engine.invoice_repository.find_all_by_merchant_id(@id)
+    repo_ref.engine.invoice_repository.find_all_by_merchant_id(id)
   end
 
   def revenue(date=nil)
-    scoped_invoices = invoices.select(&:successful?)
-    date && scoped_invoices.select! { |invoice| invoice.updated_at == date }
-    scoped_invoices.map(&:total).reduce(:+)
+    invoices_for_date(date).map(&:total).reduce(:+)
   end
 
   def favorite_customer
-    scoped_invoices  = invoices.select(&:successful?)
-    grouped_invoices = scoped_invoices.group_by do
-      |invoice| invoice.customer_id
-    end
-
-    customer_id = grouped_invoices.max_by { |key, values| values.count }.first
+    customer_id = invoices.select(&:successful?)
+                          .group_by(&:customer_id)
+                          .max_by { |key, values| values.count }
+                          .first
 
     repo_ref.engine.customer_repository.find_by_id(customer_id)
   end
 
   def customers_with_pending_invoices
-    pending_invoices = invoices.select do
-      |invoice| invoice.successful_transactions.none?
-    end
+    invoices.reject(&:successful?)
+            .collect(&:customer)
+  end
 
-    pending_invoices.collect { |invoice| invoice.customer }
+  private
+
+  def invoices_for_date(date = nil)
+    successful_invoices = invoices.select(&:successful?)
+
+    if date
+      successful_invoices.select { |invoice| invoice.updated_at == date }
+    else
+      successful_invoices
+    end
   end
 end

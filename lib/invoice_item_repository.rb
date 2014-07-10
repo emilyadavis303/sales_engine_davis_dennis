@@ -7,18 +7,18 @@ class InvoiceItemRepository
   attr_reader   :invoice_items,
                 :engine
 
-  def initialize(engine, data_path='./data')
+  def initialize(engine, data_path)
     @invoice_items =
       Parser.new.parse(data_path + '/invoice_items.csv', InvoiceItem, self)
     @engine        = engine
   end
 
   def inspect
-    "#<#{self.class} #{@invoice_items.size} rows>"
+    "#<#{self.class} #{invoice_items.size} rows>"
   end
 
   def random
-    invoice_items.shuffle.first
+    invoice_items.sample
   end
 
   def all
@@ -26,33 +26,23 @@ class InvoiceItemRepository
   end
 
   def find_by_item_id(item_id)
-    invoice_items.find do
-      |item| item.item_id.to_s == item_id.to_s
-    end
+    invoice_items.find { |item| item.item_id.to_s == item_id.to_s }
   end
 
   def find_all_by_item_id(item_id)
-    invoice_items.find_all do
-      |item| item.item_id.to_s == item_id.to_s
-    end
+    invoice_items.find_all { |item| item.item_id.to_s == item_id.to_s }
   end
 
   def find_all_by_quantity(quantity)
-    invoice_items.find_all do
-      |item| item.quantity == quantity.to_s
-    end
+    invoice_items.find_all { |item| item.quantity == quantity.to_s }
   end
 
   def find_by_id(id)
-    invoice_items.find do
-      |item| item.id.to_s == id.to_s
-    end
+    invoice_items.find { |item| item.id.to_s == id.to_s }
   end
 
   def find_all_by_invoice_id(invoice_id)
-    invoice_items.find_all do
-      |item| item.invoice_id.to_s == invoice_id.to_s
-    end
+    invoice_items.find_all { |item| item.invoice_id.to_s == invoice_id.to_s }
   end
 
   def count

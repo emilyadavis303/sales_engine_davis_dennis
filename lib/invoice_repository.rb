@@ -8,17 +8,17 @@ class InvoiceRepository
   attr_reader   :invoices,
                 :engine
 
-  def initialize(engine, data_path='./data')
+  def initialize(engine, data_path)
     @invoices = Parser.new.parse(data_path + '/invoices.csv', Invoice, self)
     @engine   = engine
   end
 
   def inspect
-    "#<#{self.class} #{@invoices.size} rows>"
+    "#<#{self.class} #{invoices.size} rows>"
   end
 
   def random
-    invoices.shuffle.first
+    invoices.sample
   end
 
   def all
@@ -26,39 +26,27 @@ class InvoiceRepository
   end
 
   def find_by_status(status)
-    invoices.find do
-      |invoice| invoice.status == status
-    end
+    invoices.find { |invoice| invoice.status == status }
   end
 
   def find_all_by_status(status)
-    invoices.find_all do
-      |invoice| invoice.status == status
-    end
+    invoices.find_all { |invoice| invoice.status == status }
   end
 
   def find_by_id(id)
-    invoices.find do
-      |invoice| invoice.id == id
-    end
+    invoices.find { |invoice| invoice.id == id }
   end
 
   def find_all_by_merchant_id(merchant_id)
-    invoices.find_all do
-      |invoice| invoice.merchant_id == merchant_id
-    end
+    invoices.find_all { |invoice| invoice.merchant_id == merchant_id }
   end
 
   def find_all_by_customer_id(customer_id)
-    invoices.find_all do
-      |invoice| invoice.customer_id == customer_id
-    end
+    invoices.find_all { |invoice| invoice.customer_id == customer_id }
   end
 
   def find_all_by_date(created_at)
-    invoices.find_all do
-      |invoice| invoice.created_at == created_at
-    end
+    invoices.find_all { |invoice| invoice.created_at == created_at }
   end
 
   def count

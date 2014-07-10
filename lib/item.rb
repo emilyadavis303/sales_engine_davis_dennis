@@ -23,10 +23,10 @@ class Item
   end
 
   def invoice_items
-    repo_ref.engine.invoice_item_repository.find_all_by_item_id(@id)
+    repo_ref.engine.invoice_item_repository.find_all_by_item_id(id)
   end
 
   def merchant
-    repo_ref.engine.merchant_repository.find_by_id(@merchant_id)
+    repo_ref.engine.merchant_repository.find_by_id(merchant_id)
   end
 end
